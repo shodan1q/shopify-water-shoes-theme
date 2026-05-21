@@ -1,0 +1,18 @@
+<section class="page-template">
+  <div class="page-width" style="max-width:760px;">
+    <h1>My addresses</h1>
+
+    {%- paginate customer.addresses by 6 -%}
+      {%- for address in customer.addresses -%}
+        <div style="padding:20px;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:16px;">
+          {%- if address == customer.default_address -%}
+            <div style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--color-primary-dark);font-weight:700;margin-bottom:8px;">Default</div>
+          {%- endif -%}
+          <p>{{ address | format_address }}</p>
+        </div>
+      {%- endfor -%}
+    {%- endpaginate -%}
+
+    <p class="text-center mt-8"><a href="{{ routes.account_url }}" class="btn btn--secondary">Back to account</a></p>
+  </div>
+</section>

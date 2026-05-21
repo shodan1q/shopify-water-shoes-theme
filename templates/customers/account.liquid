@@ -1,0 +1,43 @@
+<section class="page-template">
+  <div class="page-width">
+    <h1>My account</h1>
+    <p style="text-align:center;color:#64748b;margin-bottom:32px;">Welcome back, {{ customer.first_name | default: customer.email }}</p>
+
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:32px;max-width:1000px;margin:0 auto;">
+      <aside>
+        <h3 style="font-size:14px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;">Account</h3>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+          <li><a href="{{ routes.account_addresses_url }}">Addresses</a></li>
+          <li><a href="{{ routes.account_logout_url }}">Log out</a></li>
+        </ul>
+      </aside>
+      <div>
+        <h2 style="font-size:24px;margin-bottom:20px;">Order history</h2>
+        {%- if customer.orders.size > 0 -%}
+          <table style="width:100%;border-collapse:collapse;">
+            <thead>
+              <tr style="text-align:left;border-bottom:1px solid #e2e8f0;">
+                <th style="padding:10px 0;">Order</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for order in customer.orders -%}
+                <tr style="border-bottom:1px solid #e2e8f0;">
+                  <td style="padding:14px 0;"><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                  <td>{{ order.created_at | date: '%b %-d, %Y' }}</td>
+                  <td>{{ order.total_price | money }}</td>
+                  <td>{{ order.financial_status_label }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        {%- else -%}
+          <p>You haven't placed any orders yet.</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,93 @@
+<section class="hero">
+  <div class="page-width hero-inner">
+    <div class="hero-content">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="hero-eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h1>{{ section.settings.heading }}</h1>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="hero-subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+      <div class="hero-buttons">
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="btn btn--large">
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.button_label_2 != blank -%}
+          <a href="{{ section.settings.button_link_2 | default: '#' }}" class="btn btn--secondary btn--large">
+            {{ section.settings.button_label_2 }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="hero-image">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+          loading="eager">
+      {%- else -%}
+        <div class="hero-placeholder">👟💦</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "New season • 2025 collection"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Move freely, on every surface."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "AquaStep water shoes are engineered with lightweight knit, quick-drain soles, and grip-anywhere rubber — built for the beach, the boat, and the trail."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Primary button",
+      "default": "Shop Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Primary link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Secondary button",
+      "default": "Our Technology"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Secondary link"
+    }
+  ],
+  "presets": [
+    { "name": "Hero" }
+  ]
+}
+{% endschema %}

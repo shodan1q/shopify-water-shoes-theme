@@ -1,0 +1,40 @@
+{%- if template contains 'product' and product -%}
+  {%- assign og_title = product.title | escape -%}
+  {%- assign og_url = shop.url | append: product.url -%}
+  {%- assign og_type = 'product' -%}
+  {%- assign og_description = product.description | strip_html | truncate: 300 | escape -%}
+  {%- if product.featured_media -%}
+    {%- assign og_image = product.featured_media | image_url: width: 1200 -%}
+  {%- endif -%}
+{%- elsif template contains 'article' and article -%}
+  {%- assign og_title = article.title | escape -%}
+  {%- assign og_url = shop.url | append: article.url -%}
+  {%- assign og_type = 'article' -%}
+  {%- assign og_description = article.excerpt_or_content | strip_html | truncate: 300 | escape -%}
+  {%- if article.image -%}
+    {%- assign og_image = article.image | image_url: width: 1200 -%}
+  {%- endif -%}
+{%- else -%}
+  {%- assign og_title = page_title | escape -%}
+  {%- assign og_url = canonical_url -%}
+  {%- assign og_type = 'website' -%}
+  {%- assign og_description = page_description | default: shop.description | escape -%}
+{%- endif -%}
+
+<meta property="og:site_name" content="{{ shop.name }}">
+<meta property="og:title" content="{{ og_title }}">
+<meta property="og:url" content="{{ og_url }}">
+<meta property="og:type" content="{{ og_type }}">
+{%- if og_description != blank -%}
+  <meta property="og:description" content="{{ og_description }}">
+{%- endif -%}
+{%- if og_image -%}
+  <meta property="og:image" content="https:{{ og_image }}">
+  <meta property="og:image:secure_url" content="https:{{ og_image }}">
+{%- endif -%}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ og_title }}">
+{%- if og_description != blank -%}
+  <meta name="twitter:description" content="{{ og_description }}">
+{%- endif -%}

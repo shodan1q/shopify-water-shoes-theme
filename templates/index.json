@@ -1,0 +1,83 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "New Season • 2025 Collection",
+        "heading": "Move freely, on every surface.",
+        "subtitle": "AquaStep water shoes are engineered with lightweight knit, quick-drain soles, and grip-anywhere rubber — built for the beach, the boat, and the trail.",
+        "button_label": "Shop Collection",
+        "button_link": "/collections/all",
+        "button_label_2": "Our Technology",
+        "button_link_2": "/pages/technology"
+      }
+    },
+    "features": {
+      "type": "features",
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "icon": "💧", "heading": "Quick-Dry Knit", "text": "Drains and dries in minutes — no more soggy steps." } },
+        "f2": { "type": "feature", "settings": { "icon": "🦶", "heading": "Barefoot Feel", "text": "Ultra-lightweight design moves with you, not against you." } },
+        "f3": { "type": "feature", "settings": { "icon": "⚡", "heading": "Anti-Slip Sole", "text": "Reinforced rubber grip for wet rocks, decks, and sand." } },
+        "f4": { "type": "feature", "settings": { "icon": "🌊", "heading": "Reef Protected", "text": "Tough outer shields your feet from sharp surfaces." } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"],
+      "settings": {
+        "eyebrow": "Engineered for the Elements",
+        "heading": "Why athletes choose AquaStep",
+        "subtitle": "Tested in surf, sand, river, and reef. Every detail is designed to keep you moving."
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Best Sellers",
+        "heading": "Made for the water, ready for everything",
+        "subtitle": "Our most-loved styles, engineered with quick-dry fabric and anti-slip soles.",
+        "products_to_show": 4,
+        "view_all": true,
+        "view_all_text": "Shop all styles"
+      }
+    },
+    "image-with-text": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "image_left",
+        "eyebrow": "OUR TECHNOLOGY",
+        "heading": "Designed by surfers. Tested by everyone.",
+        "text": "Every pair of AquaStep shoes starts with a single goal: feel like you are barefoot, but with protection. We obsess over every gram, every drainage hole, every grip pattern — so you don't have to think about your feet.",
+        "button_label": "Read the story",
+        "button_link": "/pages/about"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "text": "Best water shoes I've ever owned. They're light, they drain instantly, and the grip on wet rocks is unreal. I wear them paddleboarding every weekend.", "name": "Sarah K.", "role": "Paddleboarder, San Diego" } },
+        "t2": { "type": "testimonial", "settings": { "text": "I bought these for a family trip to Hawaii. Three of us wore them daily on lava rock, sand, and in the surf. Zero blisters, zero slipping.", "name": "Marcus T.", "role": "Verified Buyer" } },
+        "t3": { "type": "testimonial", "settings": { "text": "They look way cooler than I expected. I wear them around town too — people always ask where I got them. The teal color is gorgeous.", "name": "Emma R.", "role": "Yoga Instructor, Miami" } }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {
+        "eyebrow": "Loved by 50,000+ customers",
+        "heading": "Real reviews from real adventurers"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Join the wave",
+        "heading": "Get 10% off your first order",
+        "text": "Subscribe for early access to new colors, exclusive drops, and adventure stories from our crew.",
+        "button_label": "Subscribe"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "features",
+    "featured-collection",
+    "image-with-text",
+    "testimonials",
+    "newsletter"
+  ]
+}

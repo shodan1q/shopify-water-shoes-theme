@@ -1,0 +1,16 @@
+<section class="page-template">
+  <div class="page-width" style="max-width:480px;">
+    <h1 class="text-center">Activate account</h1>
+    <p class="text-center" style="color:#64748b;margin-bottom:24px;">Create a password to activate your account.</p>
+    {%- form 'activate_customer_password' -%}
+      {%- if form.errors -%}
+        <p style="color:#dc2626;margin-bottom:16px;">{{ form.errors | default_errors }}</p>
+      {%- endif -%}
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <input type="password" name="customer[password]" placeholder="Password" required style="padding:14px 18px;border:1.5px solid #e2e8f0;border-radius:8px;">
+        <input type="password" name="customer[password_confirmation]" placeholder="Confirm password" required style="padding:14px 18px;border:1.5px solid #e2e8f0;border-radius:8px;">
+        <button type="submit" class="btn">Activate</button>
+      </div>
+    {%- endform -%}
+  </div>
+</section>

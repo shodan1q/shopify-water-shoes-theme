@@ -1,0 +1,75 @@
+<header class="site-header">
+  <div class="page-width header-inner">
+    <a href="{{ routes.root_url }}" class="header-logo">
+      {%- if section.settings.logo != blank -%}
+        <img
+          src="{{ section.settings.logo | image_url: width: section.settings.logo_width | times: 2 }}"
+          alt="{{ shop.name }}"
+          width="{{ section.settings.logo_width }}"
+          style="max-width: {{ section.settings.logo_width }}px"
+          loading="eager">
+      {%- else -%}
+        <span style="display:inline-block;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#2DD4BF,#0F766E);"></span>
+        <span>{{ shop.name | default: 'AquaStep' }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="header-nav" aria-label="Main navigation">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="header-actions">
+      <a href="{{ routes.search_url }}" class="header-icon" aria-label="Search">
+        {% render 'icon-search' %}
+      </a>
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="header-icon" aria-label="Account">
+          {% render 'icon-account' %}
+        </a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}" class="header-icon" aria-label="Cart">
+        {% render 'icon-cart' %}
+        {%- if cart.item_count > 0 -%}
+          <span class="cart-count-bubble">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+      <button type="button" class="header-icon menu-toggle" aria-expanded="false" aria-label="Menu">
+        {% render 'icon-menu' %}
+      </button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image (overrides global)"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 140
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

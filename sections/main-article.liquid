@@ -1,0 +1,27 @@
+<article class="article-template">
+  <div class="page-width">
+    <h1>{{ article.title }}</h1>
+    <div class="article-meta">
+      <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %-d, %Y' }}</time>
+      {%- if article.author != blank -%}
+        <span> · By {{ article.author }}</span>
+      {%- endif -%}
+    </div>
+    {%- if article.image -%}
+      <div style="max-width:900px;margin:0 auto 32px;border-radius:16px;overflow:hidden;">
+        <img src="{{ article.image | image_url: width: 1600 }}" alt="{{ article.image.alt | escape | default: article.title }}" loading="eager">
+      </div>
+    {%- endif -%}
+    <div class="rte">{{ article.content }}</div>
+    <div class="text-center mt-8">
+      <a href="{{ blog.url }}" class="btn btn--secondary">{{ 'blogs.article.back_to_blog' | t }}</a>
+    </div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}

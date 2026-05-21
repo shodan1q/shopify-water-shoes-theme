@@ -1,0 +1,18 @@
+<section class="page-template">
+  <div class="page-width" style="max-width:480px;">
+    <h1 class="text-center">Log in</h1>
+    {%- form 'customer_login' -%}
+      {%- if form.errors -%}
+        <p style="color:#dc2626;margin-bottom:16px;">{{ form.errors | default_errors }}</p>
+      {%- endif -%}
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:24px;">
+        <input type="email" name="customer[email]" placeholder="Email" required style="padding:14px 18px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px;">
+        <input type="password" name="customer[password]" placeholder="Password" required style="padding:14px 18px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:15px;">
+        <button type="submit" class="btn">Sign in</button>
+      </div>
+      <p class="text-center mt-4" style="font-size:14px;">
+        <a href="{{ routes.account_register_url }}">Create account</a> · <a href="{{ routes.account_recover_url }}">Forgot password?</a>
+      </p>
+    {%- endform -%}
+  </div>
+</section>

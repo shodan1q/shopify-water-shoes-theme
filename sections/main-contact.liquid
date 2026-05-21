@@ -1,0 +1,32 @@
+<section class="page-template">
+  <div class="page-width" style="max-width:680px;">
+    <h1>{{ page.title | default: 'Contact us' }}</h1>
+    {%- if page.content != blank -%}
+      <div class="rte mb-8">{{ page.content }}</div>
+    {%- endif -%}
+
+    {%- form 'contact' -%}
+      {%- if form.posted_successfully? -%}
+        <p style="background:#d1fae5;color:#065f46;padding:14px 18px;border-radius:8px;margin-bottom:16px;">{{ 'templates.contact.form.post_success' | t }}</p>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <p style="background:#fee2e2;color:#991b1b;padding:14px 18px;border-radius:8px;margin-bottom:16px;">{{ form.errors | default_errors }}</p>
+      {%- endif -%}
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+        <input type="text" name="contact[name]" placeholder="{{ 'templates.contact.form.name' | t }}" required style="padding:14px 18px;border:1.5px solid #e2e8f0;border-radius:8px;">
+        <input type="email" name="contact[email]" placeholder="{{ 'templates.contact.form.email' | t }}" required style="padding:14px 18px;border:1.5px solid #e2e8f0;border-radius:8px;">
+      </div>
+      <input type="tel" name="contact[phone]" placeholder="{{ 'templates.contact.form.phone' | t }}" style="padding:14px 18px;border:1.5px solid #e2e8f0;border-radius:8px;width:100%;margin-bottom:14px;">
+      <textarea name="contact[body]" rows="6" placeholder="{{ 'templates.contact.form.message' | t }}" required style="padding:14px 18px;border:1.5px solid #e2e8f0;border-radius:8px;width:100%;margin-bottom:14px;font-family:inherit;"></textarea>
+      <button type="submit" class="btn">{{ 'templates.contact.form.send' | t }}</button>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": []
+}
+{% endschema %}

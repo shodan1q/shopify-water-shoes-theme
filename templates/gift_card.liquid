@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="robots" content="noindex, nofollow">
+    <title>{{ 'gift_cards.issued.title' | t: value: gift_card.initial_value | money, shop: shop.name }}</title>
+    <link rel="canonical" href="{{ canonical_url }}">
+    {{ content_for_header }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    <style>
+      :root {
+        --color-primary: #2DD4BF;
+        --color-primary-dark: #0F766E;
+        --color-background: #f0fdfa;
+        --color-foreground: #0f172a;
+        --color-button: #0F766E;
+        --color-button-text: #fff;
+      }
+      body { background: linear-gradient(135deg, #ccfbf1, #5eead4); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+      .gift-card { background: #fff; border-radius: 24px; padding: 48px; max-width: 480px; width: 100%; text-align: center; box-shadow: 0 40px 80px -20px rgba(15, 118, 110, 0.3); }
+      .gift-card h2 { margin-bottom: 8px; }
+      .gift-card__value { font-size: 56px; font-weight: 900; color: var(--color-primary-dark); margin: 24px 0; }
+      .gift-card__code { background: #f0fdfa; padding: 16px; border-radius: 12px; font-family: ui-monospace, SF Mono, monospace; font-size: 16px; letter-spacing: 2px; margin: 20px 0; word-break: break-all; }
+      .gift-card__qr { margin: 24px auto; max-width: 160px; }
+    </style>
+  </head>
+  <body>
+    <div class="gift-card">
+      <div style="font-size:13px;color:#64748b;letter-spacing:2px;text-transform:uppercase;font-weight:700;">{{ shop.name }}</div>
+      <h2>You've received a gift card</h2>
+      <div class="gift-card__value">{{ gift_card.initial_value | money_without_trailing_zeros }}</div>
+      {%- if gift_card.enabled == false or gift_card.expired -%}
+        <p style="color:#dc2626">This gift card has expired or been disabled.</p>
+      {%- else -%}
+        <p>Use the code below at checkout</p>
+        <div class="gift-card__code">{{ gift_card.code | format_code }}</div>
+        <div class="gift-card__qr">{{ gift_card.qr_identifier | qr_code_tag }}</div>
+        <p style="font-size:13px;color:#64748b;">Current balance: {{ gift_card.balance | money }}</p>
+      {%- endif -%}
+      <a href="{{ shop.url }}" class="btn mt-4">Shop now</a>
+    </div>
+  </body>
+</html>

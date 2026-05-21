@@ -1,0 +1,33 @@
+{%- comment -%}
+  Render product card.
+  Required: product
+{%- endcomment -%}
+
+<a href="{{ product.url }}" class="product-card">
+  <div class="product-card__media">
+    {%- if product.compare_at_price > product.price -%}
+      <span class="product-card__badge">{{ 'products.product.sale' | t | default: 'Sale' }}</span>
+    {%- elsif product.tags contains 'new' -%}
+      <span class="product-card__badge">New</span>
+    {%- endif -%}
+
+    {%- if product.featured_media -%}
+      <img
+        src="{{ product.featured_media | image_url: width: 600 }}"
+        alt="{{ product.featured_media.alt | escape | default: product.title }}"
+        loading="lazy"
+        width="600"
+        height="600">
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+
+  <div class="product-card__info">
+    {%- if settings.show_vendor and product.vendor != blank -%}
+      <div class="product-card__vendor">{{ product.vendor }}</div>
+    {%- endif -%}
+    <div class="product-card__title">{{ product.title }}</div>
+    <div class="product-card__price">{% render 'price', product: product %}</div>
+  </div>
+</a>
