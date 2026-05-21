@@ -1,0 +1,117 @@
+<section class="section-padding rich-text-section"{% if section.settings.bg_color != blank %} style="background:{{ section.settings.bg_color }}"{% endif %}>
+  <div class="page-width">
+    <div class="rich-text {% if section.settings.alignment == 'center' %}rich-text--center{% endif %}">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'eyebrow' -%}
+            <span class="eyebrow" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+          {%- when 'heading' -%}
+            <h2 {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+          {%- when 'paragraph' -%}
+            <p {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+          {%- when 'quote' -%}
+            <blockquote {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+              {%- if block.settings.attribution != blank -%}<cite>— {{ block.settings.attribution }}</cite>{%- endif -%}
+            </blockquote>
+          {%- when 'button' -%}
+            <a href="{{ block.settings.link | default: '#' }}" class="btn {% if block.settings.style == 'secondary' %}btn--secondary{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text }}</a>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .rich-text { max-width: 760px; margin: 0 auto; }
+  .rich-text--center { text-align: center; }
+  .rich-text h2 { font-size: clamp(28px, 4vw, 42px); margin: 14px 0 16px; }
+  .rich-text p { font-size: 17px; line-height: 1.75; color: #334155; margin-bottom: 20px; }
+  .rich-text blockquote {
+    border-left: 4px solid var(--color-primary);
+    padding: 12px 24px;
+    margin: 24px 0;
+    font-size: 19px;
+    font-style: italic;
+    color: #134e4a;
+    background: rgba(45, 212, 191, 0.06);
+    border-radius: 0 12px 12px 0;
+  }
+  .rich-text--center blockquote {
+    border-left: 0;
+    border-radius: 16px;
+    text-align: center;
+  }
+  .rich-text blockquote cite { display: block; margin-top: 12px; font-style: normal; font-size: 13px; color: #64748b; }
+  .rich-text .btn { margin-top: 14px; }
+</style>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "settings": [
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    { "type": "color", "id": "bg_color", "label": "Background" }
+  ],
+  "blocks": [
+    {
+      "type": "eyebrow",
+      "name": "Eyebrow",
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Our story" }]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Built by surfers, for everyone." }]
+    },
+    {
+      "type": "paragraph",
+      "name": "Paragraph",
+      "settings": [{ "type": "textarea", "id": "text", "label": "Text", "default": "Three friends. One bad pair of beach shoes. Hundreds of prototypes later, AquaStep was born — engineered to feel like nothing on your feet, but built to grip anything underneath." }]
+    },
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Quote", "default": "The most comfortable shoes I've ever owned — period." },
+        { "type": "text", "id": "attribution", "label": "Attribution" }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Label", "default": "Read more" },
+        { "type": "url", "id": "link", "label": "Link" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "secondary", "label": "Secondary" }
+          ],
+          "default": "primary"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "eyebrow" },
+      { "type": "heading" },
+      { "type": "paragraph" }
+    ]
+  },
+  "presets": [ { "name": "Rich text" } ]
+}
+{% endschema %}

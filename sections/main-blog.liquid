@@ -1,32 +1,88 @@
-<section class="collection-header">
+<section class="blog-header">
   <div class="page-width">
+    {% render 'breadcrumb' %}
+    <p class="eyebrow">{{ section.settings.eyebrow | default: 'Journal' }}</p>
     <h1>{{ blog.title }}</h1>
+    {%- if section.settings.subtitle != blank -%}
+      <p class="blog-header__sub">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
   </div>
 </section>
 
-<section class="collection-body">
+<section class="blog-body">
   <div class="page-width">
-    {%- paginate blog.articles by 12 -%}
-      <div class="product-grid">
+    {%- comment -%} Tag filter chips {%- endcomment -%}
+    {%- if blog.all_tags.size > 0 -%}
+      <div class="blog-tags">
+        <a href="{{ blog.url }}" class="blog-tag {% if current_tags == blank %}is-active{% endif %}">All</a>
+        {%- for tag in blog.all_tags -%}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="blog-tag {% if current_tags contains tag %}is-active{% endif %}">{{ tag }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- paginate blog.articles by section.settings.posts_per_page -%}
+      {%- if current_tags == blank and paginate.current_page == 1 and blog.articles.first -%}
+        {%- assign featured = blog.articles.first -%}
+        <a href="{{ featured.url }}" class="blog-featured">
+          <div class="blog-featured__media">
+            {%- if featured.image -%}
+              <img src="{{ featured.image | image_url: width: 1600 }}" alt="{{ featured.image.alt | escape | default: featured.title }}" loading="eager">
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="blog-featured__body">
+            <span class="eyebrow">Featured</span>
+            <h2>{{ featured.title }}</h2>
+            {%- if featured.excerpt_or_content != blank -%}
+              <p>{{ featured.excerpt_or_content | strip_html | truncate: 160 }}</p>
+            {%- endif -%}
+            <div class="blog-card__meta">
+              {%- if featured.author -%}<span>{{ featured.author }}</span>·{%- endif -%}
+              <time datetime="{{ featured.published_at | date: '%Y-%m-%d' }}">{{ featured.published_at | date: '%b %-d, %Y' }}</time>
+            </div>
+            <span class="blog-featured__cta">Read story →</span>
+          </div>
+        </a>
+      {%- endif -%}
+
+      <div class="blog-grid">
         {%- for article in blog.articles -%}
-          <a href="{{ article.url }}" class="product-card">
-            <div class="product-card__media">
+          {%- if current_tags == blank and paginate.current_page == 1 and forloop.first -%}
+            {%- continue -%}
+          {%- endif -%}
+
+          {%- assign a_words = article.content | strip_html | split: ' ' | size -%}
+          {%- assign a_minutes = a_words | divided_by: 200 | at_least: 1 -%}
+
+          <a href="{{ article.url }}" class="blog-card">
+            <div class="blog-card__media">
               {%- if article.image -%}
-                <img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.image.alt | escape | default: article.title }}" loading="lazy">
+                <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt | escape | default: article.title }}" loading="lazy">
               {%- else -%}
                 {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
               {%- endif -%}
             </div>
-            <div class="product-card__info" style="text-align:left;padding:18px 8px;">
-              <div style="font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">{{ article.published_at | date: '%b %-d, %Y' }}</div>
-              <div class="product-card__title" style="text-align:left;font-size:18px;">{{ article.title }}</div>
-              {%- if article.excerpt_or_content != blank -%}
-                <p style="font-size:14px;color:#64748b;margin-top:8px;line-height:1.6;">{{ article.excerpt_or_content | strip_html | truncate: 100 }}</p>
+            <div class="blog-card__body">
+              {%- if article.tags.size > 0 -%}
+                <span class="blog-card__tag">{{ article.tags.first }}</span>
               {%- endif -%}
+              <h3>{{ article.title }}</h3>
+              {%- if article.excerpt_or_content != blank -%}
+                <p>{{ article.excerpt_or_content | strip_html | truncate: 110 }}</p>
+              {%- endif -%}
+              <div class="blog-card__meta">
+                <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%b %-d, %Y' }}</time>
+                ·
+                <span>{{ a_minutes }} min read</span>
+              </div>
             </div>
           </a>
         {%- endfor -%}
       </div>
+
+      {% render 'pagination', paginate: paginate %}
     {%- endpaginate -%}
   </div>
 </section>
@@ -34,6 +90,28 @@
 {% schema %}
 {
   "name": "Blog",
-  "settings": []
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Journal"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Field tests, athlete stories, and dispatches from where the water is good."
+    },
+    {
+      "type": "range",
+      "id": "posts_per_page",
+      "label": "Posts per page",
+      "min": 6,
+      "max": 24,
+      "step": 2,
+      "default": 9
+    }
+  ]
 }
 {% endschema %}

@@ -23,7 +23,9 @@
     "free_shipping_threshold": 79,
     "show_order_note": true,
     "show_cookie_banner": true,
-    "show_country_selector": true
+    "show_country_selector": true,
+    "show_newsletter_popup": true,
+    "newsletter_popup_delay": 5
   },
   "presets": {
     "AquaStep Default": {

@@ -1,4 +1,4 @@
-<header class="site-header">
+<header class="site-header" data-site-header>
   <div class="page-width header-inner">
     <a href="{{ routes.root_url }}" class="header-logo">
       {%- if section.settings.logo != blank -%}
@@ -16,7 +16,44 @@
 
     <nav class="header-nav" aria-label="Main navigation">
       {%- for link in section.settings.menu.links -%}
-        <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- if link.links.size > 0 -%}
+          <div class="header-nav__item has-submenu" data-mega-trigger>
+            <a href="{{ link.url }}" class="header-nav__link">
+              {{ link.title }}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </a>
+            <div class="mega-menu" data-mega-menu>
+              <div class="page-width">
+                <div class="mega-menu__grid">
+                  {%- for sublink in link.links -%}
+                    <div class="mega-menu__col">
+                      <a href="{{ sublink.url }}" class="mega-menu__heading">{{ sublink.title }}</a>
+                      {%- if sublink.links.size > 0 -%}
+                        <ul>
+                          {%- for grandchild in sublink.links -%}
+                            <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                    </div>
+                  {%- endfor -%}
+
+                  {%- if section.settings.mega_promo_image != blank -%}
+                    <a href="{{ section.settings.mega_promo_link | default: '#' }}" class="mega-menu__promo">
+                      <img src="{{ section.settings.mega_promo_image | image_url: width: 600 }}" alt="{{ section.settings.mega_promo_heading | escape }}" loading="lazy">
+                      <div class="mega-menu__promo-body">
+                        <strong>{{ section.settings.mega_promo_heading }}</strong>
+                        <span>{{ section.settings.mega_promo_cta | default: 'Shop now →' }}</span>
+                      </div>
+                    </a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- else -%}
+          <a href="{{ link.url }}" class="header-nav__link">{{ link.title }}</a>
+        {%- endif -%}
       {%- endfor -%}
     </nav>
 
@@ -29,6 +66,10 @@
           {% render 'icon-account' %}
         </a>
       {%- endif -%}
+      <a href="/pages/wishlist" class="header-icon header-icon--wishlist" aria-label="Wishlist" data-wishlist-link>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="cart-count-bubble" data-wishlist-count-bubble hidden>0</span>
+      </a>
       {%- if settings.cart_type == 'drawer' -%}
         <button type="button" class="header-icon" aria-label="Cart" data-cart-open>
           {% render 'icon-cart' %}
@@ -53,30 +94,15 @@
 {
   "name": "Header",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo image (overrides global)"
-    },
-    {
-      "type": "range",
-      "id": "logo_width",
-      "min": 50,
-      "max": 250,
-      "step": 10,
-      "unit": "px",
-      "label": "Logo width",
-      "default": 140
-    },
-    {
-      "type": "link_list",
-      "id": "menu",
-      "label": "Menu",
-      "default": "main-menu"
-    }
+    { "type": "image_picker", "id": "logo", "label": "Logo image (overrides global)" },
+    { "type": "range", "id": "logo_width", "min": 50, "max": 250, "step": 10, "unit": "px", "label": "Logo width", "default": 140 },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "header", "content": "Mega menu promo card" },
+    { "type": "image_picker", "id": "mega_promo_image", "label": "Promo image" },
+    { "type": "text", "id": "mega_promo_heading", "label": "Promo heading", "default": "New: Summer 2025" },
+    { "type": "text", "id": "mega_promo_cta", "label": "Promo CTA", "default": "Shop now →" },
+    { "type": "url", "id": "mega_promo_link", "label": "Promo link" }
   ],
-  "enabled_on": {
-    "groups": ["header"]
-  }
+  "enabled_on": { "groups": ["header"] }
 }
 {% endschema %}

@@ -1,20 +1,150 @@
+{%- assign words = article.content | strip_html | split: ' ' | size -%}
+{%- assign reading_minutes = words | divided_by: 200 | at_least: 1 -%}
+
 <article class="article-template">
   <div class="page-width">
-    <h1>{{ article.title }}</h1>
-    <div class="article-meta">
-      <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %-d, %Y' }}</time>
-      {%- if article.author != blank -%}
-        <span> · By {{ article.author }}</span>
+    {% render 'breadcrumb' %}
+
+    <header class="article-hero">
+      {%- if article.tags.size > 0 -%}
+        <div class="article-tags">
+          {%- for tag in article.tags limit: 3 -%}
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article-tag">{{ tag }}</a>
+          {%- endfor -%}
+        </div>
       {%- endif -%}
+
+      <h1>{{ article.title }}</h1>
+
+      <div class="article-meta">
+        {%- if article.author != blank -%}
+          <span class="article-meta__author">
+            <span class="article-author-avatar">{{ article.author | slice: 0, 1 }}</span>
+            By <strong>{{ article.author }}</strong>
+          </span>
+        {%- endif -%}
+        <span>·</span>
+        <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%B %-d, %Y' }}</time>
+        <span>·</span>
+        <span>{{ reading_minutes }} min read</span>
+      </div>
+
+      {%- if article.image -%}
+        <div class="article-cover">
+          <img src="{{ article.image | image_url: width: 1800 }}"
+               srcset="{{ article.image | image_url: width: 800 }} 800w,
+                       {{ article.image | image_url: width: 1200 }} 1200w,
+                       {{ article.image | image_url: width: 1800 }} 1800w"
+               sizes="(min-width: 900px) 900px, 100vw"
+               alt="{{ article.image.alt | escape | default: article.title }}"
+               loading="eager">
+        </div>
+      {%- endif -%}
+    </header>
+
+    <div class="article-body">
+      <aside class="article-sidebar">
+        <div class="article-share">
+          <span class="article-share__label">Share</span>
+          <a href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ article.url }}&text={{ article.title | url_encode }}" target="_blank" rel="noopener" aria-label="X">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ article.url }}" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/></svg>
+          </a>
+          <a href="mailto:?subject={{ article.title | url_encode }}&body={{ shop.url }}{{ article.url }}" aria-label="Email">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+          <button type="button" data-copy-link data-link="{{ shop.url }}{{ article.url }}" aria-label="Copy link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </button>
+        </div>
+
+        <div class="article-toc" data-article-toc hidden>
+          <span class="article-toc__label">In this article</span>
+          <ol data-article-toc-list></ol>
+        </div>
+      </aside>
+
+      <div class="article-content rte" data-article-content>
+        {{ article.content }}
+      </div>
     </div>
-    {%- if article.image -%}
-      <div style="max-width:900px;margin:0 auto 32px;border-radius:16px;overflow:hidden;">
-        <img src="{{ article.image | image_url: width: 1600 }}" alt="{{ article.image.alt | escape | default: article.title }}" loading="eager">
+
+    {%- if article.author != blank or section.settings.show_author_bio -%}
+      <div class="article-author-card">
+        <div class="article-author-card__avatar">{{ article.author | slice: 0, 1 }}</div>
+        <div class="article-author-card__body">
+          <p class="article-author-card__role">{{ section.settings.author_role | default: 'AquaStep crew' }}</p>
+          <h3>{{ article.author | default: 'AquaStep team' }}</h3>
+          <p>{{ section.settings.author_bio | default: 'Tests every pair, in every kind of water. Surf checks at sunrise, river hikes at noon, board decks at dusk.' }}</p>
+        </div>
       </div>
     {%- endif -%}
-    <div class="rte">{{ article.content }}</div>
+
+    {%- if blog.articles.size > 1 -%}
+      <section class="article-related">
+        <div class="section-heading" style="margin-bottom:32px">
+          <span class="eyebrow">Keep reading</span>
+          <h2 style="font-size:clamp(22px,3vw,30px)">More from {{ blog.title }}</h2>
+        </div>
+        <div class="product-grid">
+          {%- assign shown = 0 -%}
+          {%- for related in blog.articles -%}
+            {%- if related.id != article.id and shown < 3 -%}
+              <a href="{{ related.url }}" class="product-card">
+                <div class="product-card__media">
+                  {%- if related.image -%}
+                    <img src="{{ related.image | image_url: width: 600 }}" alt="{{ related.image.alt | escape | default: related.title }}" loading="lazy">
+                  {%- else -%}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="product-card__info" style="text-align:left">
+                  <div style="font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">{{ related.published_at | date: '%b %-d, %Y' }}</div>
+                  <div class="product-card__title" style="text-align:left;font-size:17px">{{ related.title }}</div>
+                </div>
+              </a>
+              {%- assign shown = shown | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- if blog.comments_enabled? -%}
+      <section class="article-comments">
+        <h2>{{ 'blogs.article.comments' | t: count: article.comments_count }}</h2>
+        {%- if article.comments.size > 0 -%}
+          {%- for comment in article.comments -%}
+            <div class="comment">
+              <div class="comment__author">{{ comment.author }}</div>
+              <time class="comment__date">{{ comment.created_at | date: '%b %-d, %Y' }}</time>
+              <div class="comment__body rte">{{ comment.content }}</div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- form 'new_comment', article -%}
+          {%- if form.posted_successfully? -%}
+            <p class="auth-alert auth-alert--success">{{ 'blogs.article.moderated' | t }}</p>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <p class="auth-alert auth-alert--error">{{ form.errors | default_errors }}</p>
+          {%- endif -%}
+          <h3>{{ 'blogs.article.comment_form_title' | t }}</h3>
+          <div class="auth-row">
+            <label class="auth-field"><span>{{ 'blogs.article.name' | t }}</span><input type="text" name="comment[author]" required></label>
+            <label class="auth-field"><span>{{ 'blogs.article.email' | t }}</span><input type="email" name="comment[email]" required></label>
+          </div>
+          <label class="auth-field"><span>{{ 'blogs.article.message' | t }}</span><textarea name="comment[body]" rows="5" required></textarea></label>
+          <button type="submit" class="btn mt-4">{{ 'blogs.article.post' | t }}</button>
+        {%- endform -%}
+      </section>
+    {%- endif -%}
+
     <div class="text-center mt-8">
-      <a href="{{ blog.url }}" class="btn btn--secondary">{{ 'blogs.article.back_to_blog' | t }}</a>
+      <a href="{{ blog.url }}" class="btn btn--secondary">← {{ 'blogs.article.back_to_blog' | t }}</a>
     </div>
   </div>
 </article>
@@ -22,6 +152,25 @@
 {% schema %}
 {
   "name": "Article",
-  "settings": []
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_author_bio",
+      "label": "Show author bio card",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "author_role",
+      "label": "Author role / tagline",
+      "default": "AquaStep crew"
+    },
+    {
+      "type": "textarea",
+      "id": "author_bio",
+      "label": "Default author bio (shown if Shopify article has none)",
+      "default": "Tests every pair, in every kind of water. Surf checks at sunrise, river hikes at noon, board decks at dusk."
+    }
+  ]
 }
 {% endschema %}

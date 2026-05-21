@@ -5,20 +5,128 @@
         <p class="eyebrow">Account</p>
         <h1>Addresses</h1>
       </div>
-      <a href="{{ routes.account_url }}" class="btn btn--secondary">Back to account</a>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button type="button" class="btn" data-address-add>+ Add address</button>
+        <a href="{{ routes.account_url }}" class="btn btn--secondary">Back to account</a>
+      </div>
     </header>
 
     {%- paginate customer.addresses by 6 -%}
-      <div class="address-grid">
-        {%- for address in customer.addresses -%}
-          <div class="address-card{% if address == customer.default_address %} address-card--default{% endif %}">
-            {%- if address == customer.default_address -%}
-              <span class="address-card__badge">Default</span>
-            {%- endif -%}
-            <p>{{ address | format_address }}</p>
-          </div>
-        {%- endfor -%}
-      </div>
+      {%- if customer.addresses.size > 0 -%}
+        <div class="address-grid">
+          {%- for address in customer.addresses -%}
+            <div class="address-card{% if address == customer.default_address %} address-card--default{% endif %}">
+              {%- if address == customer.default_address -%}
+                <span class="address-card__badge">Default</span>
+              {%- endif -%}
+              <p>{{ address | format_address }}</p>
+              <div class="address-card__actions">
+                <button type="button" class="address-card__edit" data-address-edit="{{ address.id }}">Edit</button>
+                <form method="post" action="/account/addresses/{{ address.id }}" data-address-delete onsubmit="return confirm('Delete this address?');">
+                  <input type="hidden" name="_method" value="delete">
+                  <button type="submit" class="address-card__delete">Delete</button>
+                </form>
+              </div>
+
+              {%- comment -%} Inline edit form (hidden by default) {%- endcomment -%}
+              <div class="address-form-wrap" data-address-form-wrap="{{ address.id }}" hidden>
+                {%- form 'customer_address', address -%}
+                  <div class="auth-row">
+                    <label class="auth-field"><span>First name</span>{{ form.first_name }}</label>
+                    <label class="auth-field"><span>Last name</span>{{ form.last_name }}</label>
+                  </div>
+                  <label class="auth-field"><span>Company (optional)</span>{{ form.company }}</label>
+                  <label class="auth-field"><span>Address 1</span>{{ form.address1 }}</label>
+                  <label class="auth-field"><span>Address 2 (optional)</span>{{ form.address2 }}</label>
+                  <div class="auth-row">
+                    <label class="auth-field"><span>City</span>{{ form.city }}</label>
+                    <label class="auth-field"><span>Postal / ZIP</span>{{ form.zip }}</label>
+                  </div>
+                  <div class="auth-row">
+                    <label class="auth-field"><span>Country</span>{{ form.country }}</label>
+                    <label class="auth-field"><span>Province / State</span>{{ form.province }}</label>
+                  </div>
+                  <label class="auth-field"><span>Phone</span>{{ form.phone }}</label>
+                  <label class="auth-field" style="flex-direction:row;align-items:center;gap:8px;">
+                    {{ form.set_as_default_checkbox }} <span>Set as default address</span>
+                  </label>
+                  <div style="display:flex;gap:8px;margin-top:12px;">
+                    <button type="submit" class="btn">Save</button>
+                    <button type="button" class="btn btn--secondary" data-address-cancel="{{ address.id }}">Cancel</button>
+                  </div>
+                {%- endform -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="account-empty">
+          <div class="account-empty__icon">📮</div>
+          <h3>No addresses saved</h3>
+          <p>Add your first address to speed up checkout.</p>
+          <button type="button" class="btn" data-address-add>+ Add address</button>
+        </div>
+      {%- endif -%}
+
+      {% render 'pagination', paginate: paginate %}
     {%- endpaginate -%}
+
+    {%- comment -%} New address modal {%- endcomment -%}
+    <div class="modal" data-address-new-modal hidden>
+      <div class="modal__overlay" data-address-cancel-new></div>
+      <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Add address">
+        <button type="button" class="modal__close" data-address-cancel-new aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <h2>Add a new address</h2>
+        {%- form 'customer_address', customer.new_address -%}
+          <div class="auth-row">
+            <label class="auth-field"><span>First name</span>{{ form.first_name }}</label>
+            <label class="auth-field"><span>Last name</span>{{ form.last_name }}</label>
+          </div>
+          <label class="auth-field"><span>Company</span>{{ form.company }}</label>
+          <label class="auth-field"><span>Address 1</span>{{ form.address1 }}</label>
+          <label class="auth-field"><span>Address 2</span>{{ form.address2 }}</label>
+          <div class="auth-row">
+            <label class="auth-field"><span>City</span>{{ form.city }}</label>
+            <label class="auth-field"><span>Postal / ZIP</span>{{ form.zip }}</label>
+          </div>
+          <div class="auth-row">
+            <label class="auth-field"><span>Country</span>{{ form.country }}</label>
+            <label class="auth-field"><span>Province / State</span>{{ form.province }}</label>
+          </div>
+          <label class="auth-field"><span>Phone</span>{{ form.phone }}</label>
+          <label class="auth-field" style="flex-direction:row;align-items:center;gap:8px;">
+            {{ form.set_as_default_checkbox }} <span>Set as default address</span>
+          </label>
+          <button type="submit" class="btn btn--large" style="margin-top:14px;">Save address</button>
+        {%- endform -%}
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+(function(){
+  // New address modal
+  const modal = document.querySelector('[data-address-new-modal]');
+  document.querySelectorAll('[data-address-add]').forEach(b => b.addEventListener('click', () => { modal.hidden = false; document.body.style.overflow='hidden'; }));
+  document.querySelectorAll('[data-address-cancel-new]').forEach(b => b.addEventListener('click', () => { modal.hidden = true; document.body.style.overflow=''; }));
+
+  // Inline edit
+  document.querySelectorAll('[data-address-edit]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.addressEdit;
+      const wrap = document.querySelector(`[data-address-form-wrap="${id}"]`);
+      if (wrap) wrap.hidden = !wrap.hidden;
+    });
+  });
+  document.querySelectorAll('[data-address-cancel]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.addressCancel;
+      const wrap = document.querySelector(`[data-address-form-wrap="${id}"]`);
+      if (wrap) wrap.hidden = true;
+    });
+  });
+})();
+</script>

@@ -1,0 +1,53 @@
+<div class="newsletter-popup" data-newsletter-popup hidden>
+  <div class="newsletter-popup__overlay" data-newsletter-close></div>
+  <div class="newsletter-popup__panel" role="dialog" aria-modal="true" aria-label="Subscribe">
+    <button type="button" class="newsletter-popup__close" data-newsletter-close aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <div class="newsletter-popup__art" aria-hidden="true">🌊</div>
+    <span class="eyebrow">Welcome to the crew</span>
+    <h2>Get 10% off your first order</h2>
+    <p>Sign up for early access to new colors, drops, and adventure stories. We respect your inbox.</p>
+
+    {%- form 'customer', class: 'newsletter-popup__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter,popup">
+      <input type="email" name="contact[email]" placeholder="your@email.com" required>
+      <button type="submit" class="btn">Claim 10% off</button>
+      {%- if form.posted_successfully? -%}
+        <p class="newsletter-popup__success">Check your inbox for the code 🎉</p>
+      {%- endif -%}
+    {%- endform -%}
+
+    <p class="newsletter-popup__fine">No spam. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+<style>
+  .newsletter-popup { position: fixed; inset: 0; z-index: 220; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+  .newsletter-popup[data-open] { opacity: 1; pointer-events: auto; }
+  .newsletter-popup__overlay { position: absolute; inset: 0; background: rgba(15, 23, 42, 0.55); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); }
+  .newsletter-popup__panel {
+    position: relative;
+    background: #fff;
+    padding: 56px 44px 44px;
+    border-radius: 28px;
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 48px 100px -24px rgba(15, 23, 42, 0.4);
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+  }
+  .newsletter-popup[data-open] .newsletter-popup__panel { transform: translateY(0) scale(1); }
+  .newsletter-popup__close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #94a3b8; }
+  .newsletter-popup__close:hover { background: #f1f5f9; color: var(--color-foreground); }
+  .newsletter-popup__art { font-size: 48px; margin-bottom: 12px; filter: drop-shadow(0 10px 24px rgba(45, 212, 191, 0.4)); }
+  .newsletter-popup h2 { font-size: 28px; margin: 10px 0 12px; letter-spacing: -0.02em; }
+  .newsletter-popup p { color: #64748b; margin-bottom: 24px; font-size: 15px; }
+  .newsletter-popup__form { display: flex; flex-direction: column; gap: 10px; }
+  .newsletter-popup__form input { padding: 14px 18px; border-radius: 12px; border: 1.5px solid var(--color-border); font-size: 15px; outline: none; }
+  .newsletter-popup__form input:focus { border-color: var(--color-primary); }
+  .newsletter-popup__success { background: #d1fae5; color: #065f46; padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 14px; }
+  .newsletter-popup__fine { font-size: 12px; color: #94a3b8; margin-top: 14px; margin-bottom: 0; }
+</style>

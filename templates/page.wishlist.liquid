@@ -1,0 +1,19 @@
+<section class="page-template">
+  <div class="page-width">
+    {% render 'breadcrumb' %}
+    <header class="section-heading" style="margin-bottom:40px">
+      <span class="eyebrow">Saved for later</span>
+      <h1>My wishlist</h1>
+      <p>Items you have hearted, all in one place. Stored on this device.</p>
+    </header>
+
+    <div class="product-grid" data-wishlist-grid></div>
+
+    <div class="wishlist-empty" data-wishlist-empty hidden>
+      <div class="account-empty__icon">💗</div>
+      <h3>Your wishlist is empty</h3>
+      <p>Tap the heart on any product to save it for later.</p>
+      <a href="{{ routes.collections_url }}" class="btn">Browse water shoes</a>
+    </div>
+  </div>
+</section>

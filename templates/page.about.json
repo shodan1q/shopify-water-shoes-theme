@@ -1,0 +1,86 @@
+{
+  "sections": {
+    "image-banner": {
+      "type": "image-banner",
+      "settings": {
+        "eyebrow": "Our story",
+        "heading": "From three friends to 50,000+ feet on every coast.",
+        "text": "Built by surfers. Tested by the rest of us.",
+        "height": "medium",
+        "text_position": "left",
+        "overlay_opacity": 35
+      }
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "b1": { "type": "eyebrow", "settings": { "text": "Why we exist" } },
+        "b2": { "type": "heading", "settings": { "text": "Your feet shouldn't slow you down." } },
+        "b3": { "type": "paragraph", "settings": { "text": "Three friends, one bad pair of beach shoes, and hundreds of prototypes later — AquaStep was born. Today, our shoes are tested by the people who use them most: surf instructors in Bali, paddleboard guides in Tahoe, and reef divers in the Florida Keys. Every detail is for a reason." } }
+      },
+      "block_order": ["b1", "b2", "b3"],
+      "settings": { "alignment": "center" }
+    },
+    "stats": {
+      "type": "stats",
+      "blocks": {
+        "s1": { "type": "stat", "settings": { "value": "2021", "label": "Founded in California" } },
+        "s2": { "type": "stat", "settings": { "value": "50K+", "label": "Pairs sold worldwide" } },
+        "s3": { "type": "stat", "settings": { "value": "60-day", "label": "Try-anywhere guarantee" } },
+        "s4": { "type": "stat", "settings": { "value": "4.8/5", "label": "Avg customer rating" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {}
+    },
+    "image-with-text-1": {
+      "type": "image-with-text",
+      "settings": {
+        "layout": "image_left",
+        "eyebrow": "How we make them",
+        "heading": "Engineered grip on the outside, barefoot feel inside.",
+        "text": "We obsess over every gram. Our outsole is a multi-density rubber compound with directional lugs that bite into wet rock and coral. The upper is a single-piece knit polyester that drains in seconds and never lets a grain of sand get stuck.",
+        "button_label": "See product details",
+        "button_link": "/collections/all"
+      }
+    },
+    "press-logos": {
+      "type": "press-logos",
+      "blocks": {
+        "p1": { "type": "logo", "settings": { "name": "Outside" } },
+        "p2": { "type": "logo", "settings": { "name": "Surfer" } },
+        "p3": { "type": "logo", "settings": { "name": "GearJunkie" } },
+        "p4": { "type": "logo", "settings": { "name": "Travel + Leisure" } }
+      },
+      "block_order": ["p1","p2","p3","p4"],
+      "settings": { "heading": "As featured in", "scroll": false }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "t1": { "type": "testimonial", "settings": { "text": "The most comfortable water shoes I've owned, hands down.", "name": "Sarah K.", "role": "Paddleboarder" } },
+        "t2": { "type": "testimonial", "settings": { "text": "I wear them daily. The grip on lava rock saved my ankles in Hawaii.", "name": "Marcus T.", "role": "Traveler" } },
+        "t3": { "type": "testimonial", "settings": { "text": "Compliments everywhere I go. Teal goes with everything.", "name": "Emma R.", "role": "Yoga instructor" } }
+      },
+      "block_order": ["t1","t2","t3"],
+      "settings": { "eyebrow": "Loved by the crew", "heading": "What customers say" }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Join the wave",
+        "heading": "Stories, drops, and 10% off your first pair",
+        "text": "Field tests, athlete dispatches, and early access. No spam.",
+        "button_label": "Subscribe"
+      }
+    }
+  },
+  "order": [
+    "image-banner",
+    "rich-text",
+    "stats",
+    "image-with-text-1",
+    "press-logos",
+    "testimonials",
+    "newsletter"
+  ]
+}

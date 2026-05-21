@@ -197,6 +197,21 @@
         "id": "show_country_selector",
         "label": "Show country / currency selector in footer",
         "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_newsletter_popup",
+        "label": "Show newsletter pop-up on first visit",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "newsletter_popup_delay",
+        "label": "Pop-up delay (seconds)",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "default": 5
       }
     ]
   }

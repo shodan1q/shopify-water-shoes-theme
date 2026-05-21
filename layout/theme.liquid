@@ -64,7 +64,7 @@
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
   </head>
 
-  <body class="template-{{ template.name | handle }}">
+  <body class="template-{{ template.name | handle }}" data-newsletter-delay="{{ settings.newsletter_popup_delay | default: 5 }}">
     <a class="skip-to-content" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
 
     {% sections 'header-group' %}
@@ -83,6 +83,10 @@
 
     {%- if settings.show_cookie_banner -%}
       {% render 'cookie-banner' %}
+    {%- endif -%}
+
+    {%- if settings.show_newsletter_popup -%}
+      {% render 'newsletter-popup' %}
     {%- endif -%}
 
     <ul hidden>

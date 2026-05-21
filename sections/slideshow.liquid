@@ -1,0 +1,196 @@
+<section class="slideshow" data-slideshow data-autoplay="{{ section.settings.autoplay }}" data-interval="{{ section.settings.autoplay_speed | times: 1000 }}">
+  <div class="slideshow__track" data-slideshow-track>
+    {%- for block in section.blocks -%}
+      <div class="slide" data-slide{% if forloop.first %} data-active{% endif %} {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          <img class="slide__image"
+               src="{{ block.settings.image | image_url: width: 2000 }}"
+               srcset="{{ block.settings.image | image_url: width: 1200 }} 1200w,
+                       {{ block.settings.image | image_url: width: 2000 }} 2000w"
+               sizes="100vw"
+               alt="{{ block.settings.heading | escape }}"
+               loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+        {%- else -%}
+          <div class="slide__image slide__placeholder"></div>
+        {%- endif -%}
+        <div class="slide__overlay" style="background: linear-gradient({{ block.settings.overlay_direction }}, rgba(15,23,42,{{ block.settings.overlay_opacity | divided_by: 100.0 }}), rgba(15,23,42,0));"></div>
+        <div class="slide__content slide__content--{{ block.settings.text_position }}">
+          <div>
+            {%- if block.settings.eyebrow != blank -%}<span class="hero-eyebrow">{{ block.settings.eyebrow }}</span>{%- endif -%}
+            {%- if block.settings.heading != blank -%}<h2>{{ block.settings.heading }}</h2>{%- endif -%}
+            {%- if block.settings.subtitle != blank -%}<p>{{ block.settings.subtitle }}</p>{%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              <a href="{{ block.settings.button_link | default: '#' }}" class="btn btn--large">{{ block.settings.button_label }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.blocks.size > 1 -%}
+    <button type="button" class="slideshow__nav slideshow__nav--prev" data-slideshow-prev aria-label="Previous slide">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button type="button" class="slideshow__nav slideshow__nav--next" data-slideshow-next aria-label="Next slide">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="slideshow__dots" data-slideshow-dots>
+      {%- for block in section.blocks -%}
+        <button type="button" class="slideshow__dot {% if forloop.first %}is-active{% endif %}" data-slide-to="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}"></button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+  .slideshow { position: relative; overflow: hidden; }
+  .slideshow__track { position: relative; height: min(72vh, 720px); }
+  .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.7s ease; pointer-events: none; }
+  .slide[data-active] { opacity: 1; pointer-events: auto; }
+  .slide__image { width: 100%; height: 100%; object-fit: cover; }
+  .slide__placeholder { background: linear-gradient(135deg, #ccfbf1, #5eead4); }
+  .slide__overlay { position: absolute; inset: 0; }
+  .slide__content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    padding: 48px;
+    color: #fff;
+  }
+  .slide__content--left { align-items: center; justify-content: flex-start; text-align: left; }
+  .slide__content--center { align-items: center; justify-content: center; text-align: center; }
+  .slide__content--right { align-items: center; justify-content: flex-end; text-align: right; }
+  .slide__content--bottom_left { align-items: flex-end; justify-content: flex-start; text-align: left; }
+  .slide__content--bottom_right { align-items: flex-end; justify-content: flex-end; text-align: right; }
+  .slide__content > div { max-width: 560px; }
+  .slide__content h2 { color: #fff; font-size: clamp(32px, 5vw, 56px); margin-bottom: 16px; }
+  .slide__content p { font-size: 17px; color: rgba(255,255,255,0.9); margin-bottom: 24px; }
+  .slide__content .hero-eyebrow { color: #fff; background: rgba(255,255,255,0.18); margin-bottom: 16px; }
+
+  .slideshow__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.85);
+    color: var(--color-foreground);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 2;
+  }
+  .slideshow__nav:hover { background: #fff; }
+  .slideshow__nav--prev { left: 20px; }
+  .slideshow__nav--next { right: 20px; }
+
+  .slideshow__dots {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+  }
+  .slideshow__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    transition: background 0.2s, width 0.25s;
+    border: 0;
+  }
+  .slideshow__dot.is-active { background: #fff; width: 28px; border-radius: 999px; }
+
+  @media (max-width: 640px) {
+    .slideshow__track { height: 80vh; }
+    .slide__content { padding: 28px; }
+  }
+</style>
+
+<script>
+(function(){
+  document.querySelectorAll('[data-slideshow]:not([data-init])').forEach((root) => {
+    root.dataset.init = '1';
+    const slides = root.querySelectorAll('[data-slide]');
+    const dots = root.querySelectorAll('[data-slide-to]');
+    let idx = 0, timer;
+    const autoplay = root.dataset.autoplay === 'true';
+    const interval = parseInt(root.dataset.interval, 10) || 5000;
+    function goto(i) {
+      idx = (i + slides.length) % slides.length;
+      slides.forEach((s, n) => s.toggleAttribute('data-active', n === idx));
+      dots.forEach((d, n) => d.classList.toggle('is-active', n === idx));
+    }
+    root.querySelector('[data-slideshow-prev]')?.addEventListener('click', () => { goto(idx - 1); restart(); });
+    root.querySelector('[data-slideshow-next]')?.addEventListener('click', () => { goto(idx + 1); restart(); });
+    dots.forEach((d) => d.addEventListener('click', () => { goto(parseInt(d.dataset.slideTo, 10)); restart(); }));
+    function restart() {
+      clearInterval(timer);
+      if (autoplay && slides.length > 1) timer = setInterval(() => goto(idx + 1), interval);
+    }
+    restart();
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Slideshow",
+  "settings": [
+    { "type": "checkbox", "id": "autoplay", "label": "Auto-rotate slides", "default": true },
+    { "type": "range", "id": "autoplay_speed", "label": "Seconds per slide", "min": 3, "max": 12, "step": 1, "default": 6 }
+  ],
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Move freely, on every surface." },
+        { "type": "textarea", "id": "subtitle", "label": "Subtitle" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+        { "type": "url", "id": "button_link", "label": "Button link" },
+        {
+          "type": "select",
+          "id": "text_position",
+          "label": "Text position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" },
+            { "value": "bottom_left", "label": "Bottom left" },
+            { "value": "bottom_right", "label": "Bottom right" }
+          ],
+          "default": "left"
+        },
+        { "type": "range", "id": "overlay_opacity", "label": "Overlay opacity (%)", "min": 0, "max": 80, "step": 5, "default": 35 },
+        {
+          "type": "select",
+          "id": "overlay_direction",
+          "label": "Overlay direction",
+          "options": [
+            { "value": "to top", "label": "Bottom darkening" },
+            { "value": "to right", "label": "Left darkening" },
+            { "value": "to bottom", "label": "Top darkening" },
+            { "value": "to left", "label": "Right darkening" }
+          ],
+          "default": "to right"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "slide", "settings": { "heading": "Move freely, on every surface" } },
+      { "type": "slide", "settings": { "heading": "Engineered for the elements" } }
+    ]
+  },
+  "presets": [ { "name": "Slideshow" } ]
+}
+{% endschema %}
