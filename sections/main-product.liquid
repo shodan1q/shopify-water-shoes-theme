@@ -119,13 +119,6 @@
             </div>
           {%- endif -%}
 
-          {%- if section.settings.show_delivery_estimate -%}
-            <div class="product-delivery">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-              <span><strong>Free shipping</strong> · Estimated delivery <span data-delivery-date>5–10 business days</span></span>
-            </div>
-          {%- endif -%}
-
           <div class="product-form__buttons">
             <button
               type="submit"
@@ -145,20 +138,25 @@
             {{ form | payment_button }}
           {%- endif -%}
 
-          <div class="product-trust-badges">
-            <div class="product-trust-badge">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-              Free shipping<br><span style="font-weight:400;color:#64748b">over $79</span>
-            </div>
-            <div class="product-trust-badge">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-              60-day returns<br><span style="font-weight:400;color:#64748b">no questions</span>
-            </div>
-            <div class="product-trust-badge">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              2-year warranty<br><span style="font-weight:400;color:#64748b">on every pair</span>
-            </div>
-          </div>
+          {%- assign now = 'now' | date: '%s' | times: 1 -%}
+          {%- assign min_days = 86400 | times: 5 -%}
+          {%- assign max_days = 86400 | times: 10 -%}
+          {%- assign min_ts = now | plus: min_days -%}
+          {%- assign max_ts = now | plus: max_days -%}
+          <ul class="product-promises">
+            <li>
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              <span><strong>FREE SHIPPING</strong></span>
+            </li>
+            <li>
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              <span><strong>EXCLUSIVELY ONLINE</strong></span>
+            </li>
+            <li>
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"/></svg>
+              <span>AT YOUR DOOR BETWEEN <strong>{{ min_ts | date: '%-d/%m' }}</strong> AND <strong>{{ max_ts | date: '%-d/%m' }}</strong></span>
+            </li>
+          </ul>
         {%- endform -%}
 
         <div class="product-share">
@@ -200,8 +198,8 @@
       </div>
 
       <div class="product-tabs__panel is-active" data-tab-panel="description">
-        <div class="rte">
-          {{ product.description | default: 'Add a description in Shopify admin to populate this panel.' }}
+        <div class="rte rte--lead">
+          {{ product.description | default: 'Flexibility, comfort and style — Tidefoot water shoes have everything it takes to become the star of your summer. Designed for water outings, the sleek upper and grip-anywhere sole make them ideal for walking along the waterʼs edge, climbing on rocks, snorkeling, beach volleyball, or even a casual game of racket. Molded around the foot.' }}
         </div>
       </div>
 

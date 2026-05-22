@@ -2,6 +2,19 @@
   "type": "header",
   "name": "Header group",
   "sections": {
+    "wave-trust-bar": {
+      "type": "wave-trust-bar",
+      "blocks": {
+        "b1": { "type": "item", "settings": { "icon": "refund", "text": "Satisfied or refunded" } },
+        "b2": { "type": "item", "settings": { "icon": "support", "text": "Responsive support" } },
+        "b3": { "type": "item", "settings": { "icon": "secure", "text": "Secure payments" } }
+      },
+      "block_order": ["b1", "b2", "b3"],
+      "settings": {
+        "bg_color": "#2DD4BF",
+        "text_color": "#FFFFFF"
+      }
+    },
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
@@ -20,5 +33,5 @@
       }
     }
   },
-  "order": ["announcement-bar", "header"]
+  "order": ["wave-trust-bar", "announcement-bar", "header"]
 }

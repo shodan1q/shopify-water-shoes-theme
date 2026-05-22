@@ -3494,6 +3494,84 @@ input[type="tel"], input[type="text"], input[type="email"], input[type="number"]
   padding: 11px 14px;
 }
 
+/* ---- aqua.shoes-style stacked promise rows on product page ---- */
+.product-promises {
+  list-style: none;
+  padding: 18px 0 4px;
+  margin: 8px 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-top: 1px solid var(--color-border);
+}
+.product-promises li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--color-foreground);
+  letter-spacing: 0.5px;
+}
+.product-promises li svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+.product-promises li strong {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+/* ---- Bigger softer CTA (aqua.shoes vibe) ---- */
+.product-form__buttons .btn--large {
+  min-height: 62px;
+  font-size: 16px;
+  padding: 18px 40px;
+  border-radius: 999px;
+  letter-spacing: 1px;
+  width: 100%;
+  box-shadow: 0 12px 28px -10px rgba(15, 118, 110, 0.35);
+}
+
+/* ---- Brand-color product title (aqua treatment) ---- */
+.product-info__title {
+  color: var(--color-primary-dark);
+}
+
+/* ---- Lead paragraph teal-bold (aqua first-sentence highlight) ---- */
+.rte--lead p:first-of-type,
+.rte--lead > p:first-child,
+.rte--lead {
+  /* If description has multiple paragraphs, only first one is bold-teal */
+}
+.rte--lead > p:first-child {
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+.rte--lead > p:not(:first-child) {
+  color: #334155;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ---- Header nav chevrons for items with submenu ---- */
+.header-nav__item.has-submenu .header-nav__link svg {
+  transition: transform 0.2s;
+}
+.header-nav__item.has-submenu:hover .header-nav__link svg {
+  transform: rotate(180deg);
+}
+
+/* ---- Logo treatment closer to aqua (slightly italic if no logo image) ---- */
+.header-logo > span:not(:first-child) {
+  font-style: italic;
+  font-weight: 800;
+  font-size: 26px;
+}
+
 /* ------- Search ------- */
 .search-page { padding: 64px 0 96px; }
 .search-form {
