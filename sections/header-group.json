@@ -5,7 +5,7 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
-        "text": "Free worldwide shipping on orders over $79 — Limited time",
+        "text": "Free worldwide shipping on orders over $79 · 60-day try-anywhere guarantee",
         "link": "/collections/all"
       }
     },
@@ -13,7 +13,10 @@
       "type": "header",
       "settings": {
         "logo_width": 140,
-        "menu": "main-menu"
+        "menu": "main-menu",
+        "mega_promo_heading": "Summer 2025 — new colors",
+        "mega_promo_cta": "Shop the drop →",
+        "mega_promo_link": "/collections/all"
       }
     }
   },

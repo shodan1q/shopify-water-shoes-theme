@@ -3,13 +3,13 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "New Season • 2025 Collection",
-        "heading": "Move freely, on every surface.",
-        "subtitle": "AquaStep water shoes are engineered with lightweight knit, quick-drain soles, and grip-anywhere rubber — built for the beach, the boat, and the trail.",
-        "button_label": "Shop Collection",
+        "eyebrow": "Summer 2025 · New colors live",
+        "heading": "Let the tide carry you.",
+        "subtitle": "Tidefoot water shoes are built with a quick-drying knit upper, multi-port drainage sole, and reef-grade rubber grip — engineered for the beach, the boat, and everything in between.",
+        "button_label": "Shop the collection",
         "button_link": "/collections/all",
-        "button_label_2": "Our Technology",
-        "button_link_2": "/pages/technology",
+        "button_label_2": "Our technology",
+        "button_link_2": "/pages/about",
         "trust_text": "Rated 4.8/5 by 50,000+ adventurers worldwide"
       }
     },
@@ -17,8 +17,8 @@
       "type": "stats",
       "blocks": {
         "s1": { "type": "stat", "settings": { "value": "50K+", "label": "Pairs sold worldwide" } },
-        "s2": { "type": "stat", "settings": { "value": "4.8/5", "label": "Average rating" } },
-        "s3": { "type": "stat", "settings": { "value": "60-day", "label": "Try-anywhere guarantee" } },
+        "s2": { "type": "stat", "settings": { "value": "4.8/5", "label": "Average customer rating" } },
+        "s3": { "type": "stat", "settings": { "value": "60-day", "label": "Try-them-anywhere guarantee" } },
         "s4": { "type": "stat", "settings": { "value": "FREE", "label": "Shipping over $79" } }
       },
       "block_order": ["s1", "s2", "s3", "s4"],
@@ -27,46 +27,59 @@
     "features": {
       "type": "features",
       "blocks": {
-        "f1": { "type": "feature", "settings": { "icon": "💧", "heading": "Quick-Dry Knit", "text": "Drains and dries in minutes — no more soggy steps." } },
-        "f2": { "type": "feature", "settings": { "icon": "🦶", "heading": "Barefoot Feel", "text": "Ultra-lightweight design moves with you, not against you." } },
-        "f3": { "type": "feature", "settings": { "icon": "⚡", "heading": "Anti-Slip Sole", "text": "Reinforced rubber grip for wet rocks, decks, and sand." } },
-        "f4": { "type": "feature", "settings": { "icon": "🌊", "heading": "Reef Protected", "text": "Tough outer shields your feet from sharp surfaces." } }
+        "f1": { "type": "feature", "settings": { "icon": "💧", "heading": "Quick-Dry Knit", "text": "Drains in seconds, dries in minutes. No more soggy steps." } },
+        "f2": { "type": "feature", "settings": { "icon": "🦶", "heading": "Barefoot Feel", "text": "180g per shoe. Like a sock, but with grip and protection." } },
+        "f3": { "type": "feature", "settings": { "icon": "⚡", "heading": "Reef-Grade Sole", "text": "Multidirectional rubber lugs grip wet rock, coral, and boat decks." } },
+        "f4": { "type": "feature", "settings": { "icon": "🌊", "heading": "Saltwater Tough", "text": "Marine-grade thread and reinforced toe — built to outlast the season." } }
       },
       "block_order": ["f1", "f2", "f3", "f4"],
       "settings": {
-        "eyebrow": "Engineered for the Elements",
-        "heading": "Why athletes choose AquaStep",
-        "subtitle": "Tested in surf, sand, river, and reef. Every detail is designed to keep you moving."
+        "eyebrow": "Engineered for the elements",
+        "heading": "Why athletes choose Tidefoot",
+        "subtitle": "Field-tested by paddleboarders in San Diego, surf instructors in Bali, and reef divers in the Florida Keys."
       }
     },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
-        "eyebrow": "Best Sellers",
-        "heading": "Made for the water, ready for everything",
-        "subtitle": "Our most-loved styles, engineered with quick-dry fabric and anti-slip soles.",
+        "eyebrow": "Best sellers",
+        "heading": "Most-loved this season",
+        "subtitle": "Our top four colorways — already on 50,000+ feet from beach to trail.",
         "products_to_show": 4,
         "view_all": true,
-        "view_all_text": "Shop all styles"
+        "view_all_text": "Shop all 50 styles"
       }
     },
     "image-with-text": {
       "type": "image-with-text",
       "settings": {
         "layout": "image_left",
-        "eyebrow": "OUR TECHNOLOGY",
-        "heading": "Designed by surfers. Tested by everyone.",
-        "text": "Every pair of AquaStep shoes starts with a single goal: feel like you are barefoot, but with protection. We obsess over every gram, every drainage hole, every grip pattern — so you don't have to think about your feet.",
-        "button_label": "Read the story",
+        "eyebrow": "Built by the water, for the water",
+        "heading": "Three friends. One bad pair of beach shoes.",
+        "text": "Founders Casey, Mira, and Theo got tired of bruised feet on lava rock in Hawaii, and tired of soggy sneakers after a paddle session in San Diego. So they spent two years building the shoe they wished existed. Today it's worn by surf guides, reef divers, and kids on family vacations across 30+ countries.",
+        "button_label": "Read our story",
         "button_link": "/pages/about"
       }
+    },
+    "press-logos": {
+      "type": "press-logos",
+      "blocks": {
+        "p1": { "type": "logo", "settings": { "name": "Outside" } },
+        "p2": { "type": "logo", "settings": { "name": "Surfer" } },
+        "p3": { "type": "logo", "settings": { "name": "GearJunkie" } },
+        "p4": { "type": "logo", "settings": { "name": "Travel + Leisure" } },
+        "p5": { "type": "logo", "settings": { "name": "Runner's World" } },
+        "p6": { "type": "logo", "settings": { "name": "Men's Journal" } }
+      },
+      "block_order": ["p1","p2","p3","p4","p5","p6"],
+      "settings": { "heading": "As featured in", "scroll": true }
     },
     "testimonials": {
       "type": "testimonials",
       "blocks": {
-        "t1": { "type": "testimonial", "settings": { "text": "Best water shoes I've ever owned. They're light, they drain instantly, and the grip on wet rocks is unreal. I wear them paddleboarding every weekend.", "name": "Sarah K.", "role": "Paddleboarder, San Diego" } },
-        "t2": { "type": "testimonial", "settings": { "text": "I bought these for a family trip to Hawaii. Three of us wore them daily on lava rock, sand, and in the surf. Zero blisters, zero slipping.", "name": "Marcus T.", "role": "Verified Buyer" } },
-        "t3": { "type": "testimonial", "settings": { "text": "They look way cooler than I expected. I wear them around town too — people always ask where I got them. The teal color is gorgeous.", "name": "Emma R.", "role": "Yoga Instructor, Miami" } }
+        "t1": { "type": "testimonial", "settings": { "text": "Best water shoes I've ever owned. They're light, they drain instantly, and the grip on wet rocks is unreal. I wear them paddleboarding every weekend.", "name": "Sarah Kalani", "role": "Paddleboarder, San Diego" } },
+        "t2": { "type": "testimonial", "settings": { "text": "Bought four pairs for a family trip to Maui. Zero blisters, zero slipping — even on lava rock. My kids refuse to take them off.", "name": "Marcus Trent", "role": "Verified Buyer" } },
+        "t3": { "type": "testimonial", "settings": { "text": "I'm a yoga instructor on a sailboat. Tidefoots are the only shoe I trust on a wet deck. The teal pair gets compliments every single day.", "name": "Emma Rivera", "role": "Yoga Instructor, Miami" } }
       },
       "block_order": ["t1", "t2", "t3"],
       "settings": {
@@ -77,13 +90,13 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "What are water shoes used for?", "answer": "Water shoes protect your feet on wet, slippery, or sharp surfaces while letting water drain out quickly. They are ideal for paddleboarding, kayaking, beach walking, rocky rivers, snorkeling, and pool decks. AquaStep shoes are also light enough to wear all day as casual footwear." } },
-        "q2": { "type": "question", "settings": { "question": "How should I size AquaStep water shoes?", "answer": "AquaStep shoes fit true to size for most adults. If you are between sizes, size down for a snugger sock-like fit (recommended for swimming) or size up for more toe room (recommended for hiking). A full size chart is on every product page." } },
-        "q3": { "type": "question", "settings": { "question": "How quickly do they dry?", "answer": "The breathable knit upper and drainage ports in the sole let most of the water out within seconds. Fully air-dry time is typically 30–60 minutes depending on humidity. They will not retain odor like neoprene booties." } },
+        "q1": { "type": "question", "settings": { "question": "What are water shoes used for?", "answer": "Water shoes protect your feet on wet, slippery, or sharp surfaces while letting water drain out quickly. They are ideal for paddleboarding, kayaking, beach walking, rocky rivers, snorkeling, and pool decks. Tidefoot shoes are also light enough to wear all day as casual footwear." } },
+        "q2": { "type": "question", "settings": { "question": "How should I size Tidefoot water shoes?", "answer": "Tidefoot shoes fit true to size for most adults. If you are between sizes, size down for a snugger sock-like fit (recommended for swimming) or size up for more toe room (recommended for hiking). A full US/EU/UK size chart is on every product page." } },
+        "q3": { "type": "question", "settings": { "question": "How quickly do they dry?", "answer": "The breathable knit upper and drainage ports in the sole let most of the water exit within seconds. Fully air-dry time is typically 30–60 minutes depending on humidity. They will not retain odor like neoprene booties." } },
         "q4": { "type": "question", "settings": { "question": "Are they good for rocky beaches and reefs?", "answer": "Yes. The outsole uses a reinforced rubber compound with multidirectional lugs that grip wet rocks, coral, and slippery boat decks. The upper is made from tightly-knit polyester that resists punctures from shells and small stones." } },
         "q5": { "type": "question", "settings": { "question": "Are they machine washable?", "answer": "Yes. Rinse off sand or salt first, then machine wash on a cold gentle cycle inside a mesh bag. Air dry only — never put them in the dryer or in direct sunlight for extended periods." } },
-        "q6": { "type": "question", "settings": { "question": "What is your return policy?", "answer": "We offer a 60-day try-them-anywhere guarantee. If you are not happy for any reason, return them for a full refund or exchange — even if they have been worn outside." } },
-        "q7": { "type": "question", "settings": { "question": "Where does AquaStep ship?", "answer": "AquaStep ships worldwide. Free standard shipping is included on orders over $79 USD. Most orders arrive within 5–10 business days." } }
+        "q6": { "type": "question", "settings": { "question": "What is your return policy?", "answer": "We offer a 60-day try-them-anywhere guarantee. If you are not happy for any reason, return them for a full refund or exchange — even if they have been worn outside. Free return labels on US orders." } },
+        "q7": { "type": "question", "settings": { "question": "Where does Tidefoot ship?", "answer": "Tidefoot ships worldwide. Free standard shipping is included on orders over $79 USD. Most orders to the US, Canada, UK, EU, and Australia arrive within 5–10 business days." } }
       },
       "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7"],
       "settings": {
@@ -97,9 +110,9 @@
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "eyebrow": "Join the wave",
-        "heading": "Get 10% off your first order",
-        "text": "Subscribe for early access to new colors, exclusive drops, and adventure stories from our crew.",
+        "eyebrow": "Join the tide",
+        "heading": "Get 10% off your first pair",
+        "text": "Subscribe for early access to new colors, exclusive drops, and field stories from our athletes. No spam — just the good stuff.",
         "button_label": "Subscribe"
       }
     }
@@ -110,6 +123,7 @@
     "features",
     "featured-collection",
     "image-with-text",
+    "press-logos",
     "testimonials",
     "faq",
     "newsletter"

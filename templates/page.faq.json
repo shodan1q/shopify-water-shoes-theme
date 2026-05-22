@@ -5,7 +5,7 @@
       "blocks": {
         "b1": { "type": "eyebrow", "settings": { "text": "Help center" } },
         "b2": { "type": "heading", "settings": { "text": "Frequently asked questions" } },
-        "b3": { "type": "paragraph", "settings": { "text": "Most answers live below. Still stuck? Email support@aquastep.com — we reply within one business day." } }
+        "b3": { "type": "paragraph", "settings": { "text": "Most answers live below. Still stuck? Email support@tidefoot.com — we reply within one business day." } }
       },
       "block_order": ["b1", "b2", "b3"],
       "settings": { "alignment": "center" }
@@ -13,13 +13,13 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "What are water shoes used for?", "answer": "Water shoes protect your feet on wet, slippery, or sharp surfaces while letting water drain out quickly. They are ideal for paddleboarding, kayaking, beach walking, rocky rivers, snorkeling, and pool decks. AquaStep shoes are also light enough to wear all day as casual footwear." } },
-        "q2": { "type": "question", "settings": { "question": "How should I size them?", "answer": "AquaStep shoes fit true to size for most adults. If you are between sizes, size down for a snugger sock-like fit (recommended for swimming) or size up for more toe room (recommended for hiking). Full size chart on every product page." } },
+        "q1": { "type": "question", "settings": { "question": "What are water shoes used for?", "answer": "Water shoes protect your feet on wet, slippery, or sharp surfaces while letting water drain out quickly. They are ideal for paddleboarding, kayaking, beach walking, rocky rivers, snorkeling, and pool decks. Tidefoot shoes are also light enough to wear all day as casual footwear." } },
+        "q2": { "type": "question", "settings": { "question": "How should I size them?", "answer": "Tidefoot shoes fit true to size for most adults. If you are between sizes, size down for a snugger sock-like fit (recommended for swimming) or size up for more toe room (recommended for hiking). Full size chart on every product page." } },
         "q3": { "type": "question", "settings": { "question": "How fast do they dry?", "answer": "Most of the water exits within seconds via the drainage ports. Full air-dry time is typically 30–60 minutes depending on humidity. They will not retain odor like neoprene booties." } },
         "q4": { "type": "question", "settings": { "question": "Are they good for rocky beaches and reefs?", "answer": "Yes. The outsole uses a reinforced rubber compound with multidirectional lugs that grip wet rocks, coral, and slippery boat decks." } },
         "q5": { "type": "question", "settings": { "question": "Are they machine washable?", "answer": "Yes. Rinse off sand or salt first, then machine wash on a cold gentle cycle inside a mesh bag. Air dry only." } },
         "q6": { "type": "question", "settings": { "question": "What is your return policy?", "answer": "We offer a 60-day try-them-anywhere guarantee. If you are not happy for any reason, return them for a full refund or exchange." } },
-        "q7": { "type": "question", "settings": { "question": "Where does AquaStep ship?", "answer": "We ship worldwide. Free standard shipping over $79 USD. Most orders arrive within 5–10 business days." } },
+        "q7": { "type": "question", "settings": { "question": "Where does Tidefoot ship?", "answer": "We ship worldwide. Free standard shipping over $79 USD. Most orders arrive within 5–10 business days." } },
         "q8": { "type": "question", "settings": { "question": "Can I track my order?", "answer": "Yes. You'll receive a tracking email as soon as your order ships. Sign in to your account at any time to see status." } }
       },
       "block_order": ["q1","q2","q3","q4","q5","q6","q7","q8"],

@@ -5,7 +5,7 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "about_text": "Premium water shoes engineered for performance. Lightweight, breathable, and built to grip — from beach to trail."
+        "about_text": "Premium water shoes engineered for performance. Lightweight, quick-drying, and built to grip — from sunrise paddles to canyon hikes."
       },
       "blocks": {
         "shop": {
@@ -14,11 +14,11 @@
         },
         "support": {
           "type": "menu",
-          "settings": { "heading": "Support" }
+          "settings": { "heading": "Help" }
         },
         "contact": {
           "type": "text",
-          "settings": { "heading": "Contact", "text": "support@aquastep.com\nMon–Fri 9am–6pm PST" }
+          "settings": { "heading": "Contact", "text": "support@tidefoot.com\nMon–Fri · 9am–6pm PST" }
         }
       },
       "block_order": ["shop", "support", "contact"]
