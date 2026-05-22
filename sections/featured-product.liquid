@@ -66,7 +66,7 @@
           {%- if product -%}
             <a href="{{ product.url }}" class="btn btn--large">Shop now — {{ product.price | money }}</a>
           {%- else -%}
-            <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="btn btn--large">{{ section.settings.cta_label | default: 'Shop now' }}</a>
+            <a href="{% render 'safe-url', url: section.settings.cta_link %}" class="btn btn--large">{{ section.settings.cta_label | default: 'Shop now' }}</a>
           {%- endif -%}
           <p class="featured-product__trust">🚚 Free shipping over $79 · 🔄 60-day returns · ⚡ Ships in 24h</p>
         </div>

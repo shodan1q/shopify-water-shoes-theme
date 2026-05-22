@@ -10,12 +10,12 @@
       {%- endif -%}
       <div class="hero-buttons">
         {%- if section.settings.button_label != blank -%}
-          <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="btn btn--large">
+          <a href="{% render 'safe-url', url: section.settings.button_link %}" class="btn btn--large">
             {{ section.settings.button_label }}
           </a>
         {%- endif -%}
         {%- if section.settings.button_label_2 != blank -%}
-          <a href="{{ section.settings.button_link_2 | default: '#' }}" class="btn btn--secondary btn--large">
+          <a href="{% render 'safe-url', url: section.settings.button_link_2 %}" class="btn btn--secondary btn--large">
             {{ section.settings.button_label_2 }}
           </a>
         {%- endif -%}

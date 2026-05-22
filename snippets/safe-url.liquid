@@ -1,0 +1,26 @@
+{%- comment -%}
+  Safe URL resolver.
+
+  Usage:
+    {% render 'safe-url', url: '/products/foo' %}
+    {% render 'safe-url', url: '/collections/foo' %}
+    {% render 'safe-url', url: '/pages/foo' %}
+
+  - For /products/<handle>: returns the URL if the product exists, else /collections/all
+  - For /collections/<handle>: returns the URL if the collection exists, else /collections/all/<handle>
+  - For /pages/<handle>: returns the URL if the page exists, else /
+  - Any other URL: returned as-is
+{%- endcomment -%}
+{%- assign u = url | default: '/' -%}
+{%- if u contains '/products/' -%}
+  {%- assign h = u | split: '/products/' | last | split: '?' | first | split: '#' | first -%}
+  {%- if all_products[h].id != blank -%}{{ u }}{%- else -%}/collections/all{%- endif -%}
+{%- elsif u contains '/collections/' and u != '/collections/all' -%}
+  {%- assign h = u | split: '/collections/' | last | split: '/' | first | split: '?' | first -%}
+  {%- if collections[h].id != blank -%}{{ u }}{%- else -%}/collections/all/{{ h }}{%- endif -%}
+{%- elsif u contains '/pages/' -%}
+  {%- assign h = u | split: '/pages/' | last | split: '?' | first -%}
+  {%- if pages[h].id != blank -%}{{ u }}{%- else -%}/{%- endif -%}
+{%- else -%}
+  {{ u }}
+{%- endif -%}
