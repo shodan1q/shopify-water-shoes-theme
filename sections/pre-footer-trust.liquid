@@ -1,0 +1,157 @@
+<section class="pre-footer-trust" style="background:{{ section.settings.bg_color | default: '#fff' }}">
+  <div class="page-width">
+    <div class="pre-footer-trust__grid" style="--cols:{{ section.blocks.size }}">
+      {%- for block in section.blocks -%}
+        <div class="pre-footer-trust__item js-reveal" {{ block.shopify_attributes }}>
+          <div class="pre-footer-trust__badge">
+            {%- case block.settings.icon -%}
+              {%- when 'globe' -%}
+                <svg viewBox="0 0 120 120" width="100" height="100" aria-hidden="true">
+                  <circle cx="60" cy="60" r="42" fill="none" stroke="currentColor" stroke-width="4"/>
+                  <ellipse cx="60" cy="60" rx="18" ry="42" fill="none" stroke="currentColor" stroke-width="4"/>
+                  <line x1="18" y1="60" x2="102" y2="60" stroke="currentColor" stroke-width="4"/>
+                  <path d="M85 22 Q104 22 100 38" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                  <polyline points="92,36 100,38 100,28" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              {%- when 'stamp' -%}
+                <svg viewBox="0 0 120 120" width="100" height="100" aria-hidden="true">
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="currentColor" stroke-width="3"/>
+                  <circle cx="60" cy="60" r="38" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 4"/>
+                  <text x="60" y="48" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-weight="700" fill="currentColor" letter-spacing="2">SATISFIED</text>
+                  <text x="60" y="68" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="900" fill="currentColor" letter-spacing="3">OR</text>
+                  <text x="60" y="84" text-anchor="middle" font-family="Georgia, serif" font-size="10" font-weight="700" fill="currentColor" letter-spacing="2">REFUNDED</text>
+                </svg>
+              {%- when 'service' -%}
+                <svg viewBox="0 0 120 120" width="100" height="100" aria-hidden="true">
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="currentColor" stroke-width="3"/>
+                  <text x="60" y="46" text-anchor="middle" font-family="Georgia, serif" font-size="9" font-weight="700" fill="currentColor" letter-spacing="2.5">SERVICE</text>
+                  <text x="60" y="72" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="900" fill="currentColor" letter-spacing="3">CARE</text>
+                  <text x="60" y="88" text-anchor="middle" font-family="Georgia, serif" font-size="9" font-weight="700" fill="currentColor" letter-spacing="2.5">7 DAYS</text>
+                </svg>
+              {%- when 'secure' -%}
+                <svg viewBox="0 0 120 120" width="100" height="100" aria-hidden="true">
+                  <rect x="22" y="38" width="60" height="44" rx="6" fill="none" stroke="currentColor" stroke-width="4"/>
+                  <line x1="22" y1="52" x2="82" y2="52" stroke="currentColor" stroke-width="4"/>
+                  <line x1="32" y1="68" x2="50" y2="68" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                  <rect x="62" y="56" width="32" height="34" rx="6" fill="none" stroke="currentColor" stroke-width="4"/>
+                  <path d="M70 56 Q70 44 78 44 Q86 44 86 56" fill="none" stroke="currentColor" stroke-width="4"/>
+                  <circle cx="78" cy="72" r="3" fill="currentColor"/>
+                </svg>
+              {%- else -%}
+                <svg viewBox="0 0 120 120" width="100" height="100" aria-hidden="true">
+                  <circle cx="60" cy="60" r="42" fill="none" stroke="currentColor" stroke-width="4"/>
+                  <polyline points="44,60 56,72 78,48" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            {%- endcase -%}
+          </div>
+          <p class="pre-footer-trust__label">{{ block.settings.label }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <svg class="pre-footer-trust__wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,80 L0,30 C240,80 480,80 720,40 C960,0 1200,0 1440,40 L1440,80 Z" fill="{{ section.settings.wave_color | default: '#0F766E' }}"/>
+  </svg>
+</section>
+
+<style>
+  .pre-footer-trust {
+    padding: 80px 0 120px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pre-footer-trust__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr));
+    gap: 40px;
+    align-items: start;
+  }
+  .pre-footer-trust__item {
+    text-align: center;
+    color: var(--color-foreground);
+    transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+  }
+  .pre-footer-trust__item:hover { transform: translateY(-8px); }
+  .pre-footer-trust__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-foreground);
+    margin-bottom: 18px;
+    transition: color 0.3s;
+  }
+  .pre-footer-trust__item:hover .pre-footer-trust__badge {
+    color: var(--color-primary-dark);
+    animation: bob 0.6s ease;
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px) rotate(-3deg); }
+  }
+  .pre-footer-trust__label {
+    color: var(--color-primary-dark);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.2px;
+    margin: 0;
+  }
+  .pre-footer-trust__wave {
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    width: 100%;
+    height: 80px;
+    display: block;
+  }
+  @media (max-width: 900px) {
+    .pre-footer-trust__grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  }
+  @media (max-width: 480px) {
+    .pre-footer-trust__grid { grid-template-columns: 1fr; }
+    .pre-footer-trust { padding: 56px 0 100px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Pre-footer trust",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FFFFFF" },
+    { "type": "color", "id": "wave_color", "label": "Wave color (should match footer)", "default": "#0F766E" }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Badge icon",
+          "options": [
+            { "value": "globe", "label": "Globe (international delivery)" },
+            { "value": "stamp", "label": "Satisfied or refunded stamp" },
+            { "value": "service", "label": "After-sales service stamp" },
+            { "value": "secure", "label": "Secure payment lock" },
+            { "value": "check", "label": "Check mark" }
+          ],
+          "default": "globe"
+        },
+        { "type": "text", "id": "label", "label": "Label", "default": "International Delivery" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "badge", "settings": { "icon": "globe",   "label": "International Delivery" } },
+      { "type": "badge", "settings": { "icon": "stamp",   "label": "Satisfaction Guaranteed or Your Money Back" } },
+      { "type": "badge", "settings": { "icon": "service", "label": "After-Sales Service" } },
+      { "type": "badge", "settings": { "icon": "secure",  "label": "Secure Payment" } }
+    ]
+  },
+  "enabled_on": {
+    "groups": ["footer"]
+  }
+}
+{% endschema %}

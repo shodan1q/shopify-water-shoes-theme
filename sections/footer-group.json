@@ -2,27 +2,41 @@
   "type": "footer",
   "name": "Footer group",
   "sections": {
+    "pre-footer-trust": {
+      "type": "pre-footer-trust",
+      "blocks": {
+        "b1": { "type": "badge", "settings": { "icon": "globe", "label": "International Delivery" } },
+        "b2": { "type": "badge", "settings": { "icon": "stamp", "label": "Satisfaction Guaranteed or Your Money Back" } },
+        "b3": { "type": "badge", "settings": { "icon": "service", "label": "After-Sales Service" } },
+        "b4": { "type": "badge", "settings": { "icon": "secure", "label": "Secure Payment" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"],
+      "settings": {
+        "bg_color": "#FFFFFF",
+        "wave_color": "#0F766E"
+      }
+    },
     "footer": {
       "type": "footer",
       "settings": {
-        "about_text": "Premium water shoes engineered for performance. Lightweight, quick-drying, and built to grip — from sunrise paddles to canyon hikes."
+        "about_text": "Tidefoot — premium water shoes engineered for performance. Quick-dry knit, reef-grade rubber, built to grip from sunrise paddles to canyon hikes."
       },
       "blocks": {
+        "legal": {
+          "type": "menu",
+          "settings": { "heading": "Legal information", "menu": "policies" }
+        },
         "shop": {
           "type": "menu",
           "settings": { "heading": "Shop", "menu": "footer" }
         },
-        "support": {
-          "type": "menu",
-          "settings": { "heading": "Help" }
-        },
         "contact": {
           "type": "text",
-          "settings": { "heading": "Contact", "text": "support@tidefoot.com\nMon–Fri · 9am–6pm PST" }
+          "settings": { "heading": "Stay tuned", "text": "Promotions, new products and sales — straight to your inbox." }
         }
       },
-      "block_order": ["shop", "support", "contact"]
+      "block_order": ["legal", "shop", "contact"]
     }
   },
-  "order": ["footer"]
+  "order": ["pre-footer-trust", "footer"]
 }

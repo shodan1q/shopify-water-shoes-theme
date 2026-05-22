@@ -1,0 +1,165 @@
+/* Tidefoot — Animation primitives
+   Loaded after base.css, before page content.
+*/
+
+/* ---- Scroll progress bar ---- */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark), var(--color-accent));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.1s linear;
+  z-index: 300;
+  pointer-events: none;
+}
+
+/* ---- Scroll reveal ---- */
+.js-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(.2,.8,.2,1), transform 0.7s cubic-bezier(.2,.8,.2,1);
+  will-change: opacity, transform;
+}
+.js-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---- Hero parallax blobs (override base hero ::before / ::after) ---- */
+.hero.has-parallax::before {
+  transform: translate(0, var(--parallax-y, 0px));
+}
+.hero.has-parallax::after {
+  transform: translate(0, var(--parallax-y2, 0px));
+}
+
+/* ---- H1 letter reveal ---- */
+.hero h1 .letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40%) rotate(-6deg);
+  animation: letter-in 0.7s cubic-bezier(.2,.8,.2,1) forwards;
+  white-space: pre;
+}
+@keyframes letter-in {
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+/* ---- Splash drops on add-to-cart ---- */
+.splash-drop {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 500;
+  animation: splash 1s cubic-bezier(.2,.8,.2,1) forwards;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+@keyframes splash {
+  0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 1; }
+  60%  { opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px))) scale(0); opacity: 0; }
+}
+
+/* ---- Magnetic buttons get a smoother transition ---- */
+.btn--large, .product-form__buttons .btn {
+  transition: transform 0.18s cubic-bezier(.2,.8,.2,1), box-shadow 0.2s, background 0.2s, color 0.2s !important;
+}
+
+/* ---- Tilt cards keep their existing transitions ---- */
+.feature-card, .testimonial, .collection-card, .pre-footer-trust__badge {
+  transition: transform 0.3s cubic-bezier(.2,.8,.2,1), box-shadow 0.3s, border-color 0.3s, color 0.3s !important;
+}
+
+/* ---- Image fade-in ---- */
+img:not([data-no-fade]) {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+img.is-loaded { opacity: 1; }
+
+/* ---- Cursor blob (desktop) ---- */
+.cursor-blob {
+  position: fixed;
+  top: 0; left: 0;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-primary), transparent 70%);
+  pointer-events: none;
+  z-index: 250;
+  margin-left: -9px;
+  margin-top: -9px;
+  mix-blend-mode: multiply;
+  transition: width 0.25s, height 0.25s, margin 0.25s, opacity 0.25s;
+  opacity: 0.55;
+}
+.cursor-blob.is-active {
+  width: 48px; height: 48px;
+  margin-left: -24px;
+  margin-top: -24px;
+  opacity: 0.4;
+}
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .cursor-blob { display: none; }
+}
+
+/* ---- Ripple on click ---- */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.45);
+  pointer-events: none;
+  transform: scale(0);
+  animation: ripple 0.6s ease-out;
+}
+@keyframes ripple {
+  to { transform: scale(2.4); opacity: 0; }
+}
+
+/* ---- Scroll-aware header (hides on scroll down) ---- */
+.site-header[data-hidden] {
+  transform: translateY(-100%);
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
+}
+.site-header {
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1), padding 0.2s;
+}
+
+/* ---- Section-padding entrance for sections ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .product-grid > * {
+    animation-fill-mode: backwards;
+  }
+}
+
+/* ---- Subtle floating animation for promo / featured items ---- */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.floaty { animation: floaty 4s ease-in-out infinite; }
+
+/* ---- Underline-grow for nav links (already in header but cool to share) ---- */
+.has-grow {
+  position: relative;
+}
+.has-grow::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -3px;
+  width: 0; height: 2px;
+  background: var(--color-primary);
+  transition: width 0.3s ease;
+}
+.has-grow:hover::after { width: 100%; }
+
+/* ---- Loaded body smooth fade ---- */
+body { opacity: 1; transition: opacity 0.3s; }
+body[data-page-loading] { opacity: 0; }

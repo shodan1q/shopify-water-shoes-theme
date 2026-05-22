@@ -30,6 +30,7 @@
     {{ content_for_header }}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'animations.css' | asset_url | stylesheet_tag }}
 
     {%- liquid
       assign body_font = settings.body_font
@@ -62,6 +63,7 @@
     </style>
 
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    <script src="{{ 'animations.js' | asset_url }}" defer></script>
   </head>
 
   <body class="template-{{ template.name | handle }}" data-newsletter-delay="{{ settings.newsletter_popup_delay | default: 5 }}">
