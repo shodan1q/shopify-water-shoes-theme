@@ -4,9 +4,12 @@
   Usage:
     <a href="{% render 'collection-url', handle: 'womens-water-shoes' %}">…</a>
 
-  Returns:
-    /collections/<handle>            if the collection exists
-    /collections/all                 as a graceful fallback so the link
-                                     never produces a 404
+  Resolution order:
+    1. If a collection with this handle exists → /collections/<handle>
+    2. Otherwise → /collections/all/<handle>
+       (Shopify natively filters /collections/all by a single product tag
+        when the URL has the form /collections/all/<tag>. So as long as the
+        product is tagged with this handle, the link works — no need to
+        create a collection in admin.)
 {%- endcomment -%}
-{%- if collections[handle].id != blank -%}/collections/{{ handle }}{%- else -%}/collections/all{%- endif -%}
+{%- if collections[handle].id != blank -%}/collections/{{ handle }}{%- else -%}/collections/all/{{ handle }}{%- endif -%}
