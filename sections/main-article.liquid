@@ -75,8 +75,8 @@
       <div class="article-author-card">
         <div class="article-author-card__avatar">{{ article.author | slice: 0, 1 }}</div>
         <div class="article-author-card__body">
-          <p class="article-author-card__role">{{ section.settings.author_role | default: 'Tidefoot crew' }}</p>
-          <h3>{{ article.author | default: 'Tidefoot team' }}</h3>
+          <p class="article-author-card__role">{{ section.settings.author_role | default: 'FirstT crew' }}</p>
+          <h3>{{ article.author | default: 'FirstT team' }}</h3>
           <p>{{ section.settings.author_bio | default: 'Tests every pair, in every kind of water. Surf checks at sunrise, river hikes at noon, board decks at dusk.' }}</p>
         </div>
       </div>
@@ -163,7 +163,7 @@
       "type": "text",
       "id": "author_role",
       "label": "Author role / tagline",
-      "default": "Tidefoot crew"
+      "default": "FirstT crew"
     },
     {
       "type": "textarea",

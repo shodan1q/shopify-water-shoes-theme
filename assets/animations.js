@@ -1,5 +1,5 @@
 /**
- * Tidefoot — Animation Library
+ * FirstT — Animation Library
  * --------------------------------
  * Drop-in vanilla JS animations: scroll reveal, number count-up,
  * parallax, magnetic buttons, letter reveal, marquee, splash effect

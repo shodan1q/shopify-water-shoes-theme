@@ -1,0 +1,248 @@
+{%- liquid
+  if section.settings.product != blank
+    assign product = all_products[section.settings.product]
+  endif
+-%}
+
+<section class="featured-product-section section-padding"{% if section.settings.bg_color != blank %} style="background:{{ section.settings.bg_color }};"{% endif %}>
+  <div class="page-width">
+    <div class="featured-product">
+      <div class="featured-product__media">
+        {%- if section.settings.image_override != blank -%}
+          <img src="{{ section.settings.image_override | image_url: width: 1200 }}" alt="{{ section.settings.heading | default: 'Featured product' | escape }}" loading="lazy">
+        {%- elsif product.featured_media -%}
+          <img src="{{ product.featured_media | image_url: width: 1200 }}" alt="{{ product.title | escape }}" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'featured-shoe-teal.jpg' | asset_url }}" alt="{{ section.settings.heading | default: 'Featured shoe' | escape }}" loading="lazy">
+        {%- endif -%}
+        {%- if section.settings.badge != blank -%}
+          <span class="featured-product__badge">{{ section.settings.badge }}</span>
+        {%- endif -%}
+      </div>
+
+      <div class="featured-product__info">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h2>{{ section.settings.heading | default: product.title }}</h2>
+
+        {%- if product -%}
+          <div class="featured-product__rating">
+            <span class="stars">★★★★★</span>
+            <span>4.9 · {{ section.settings.review_count | default: '1,247' }} reviews</span>
+          </div>
+          <div class="featured-product__price">
+            {%- if product.compare_at_price > product.price -%}
+              <span class="price--compare">{{ product.compare_at_price | money }}</span>
+            {%- endif -%}
+            <span class="price--current">{{ product.price | money }}</span>
+            {%- if product.compare_at_price > product.price -%}
+              {%- assign discount_pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+              <span class="featured-product__discount">Save {{ discount_pct }}%</span>
+            {%- endif -%}
+          </div>
+        {%- else -%}
+          <div class="featured-product__price">
+            <span class="price--compare">{{ section.settings.compare_at_price | default: '$49.99' }}</span>
+            <span class="price--current">{{ section.settings.price | default: '$29.99' }}</span>
+            <span class="featured-product__discount">Save 40%</span>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.subtitle != blank -%}
+          <p class="featured-product__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+
+        <ul class="featured-product__benefits">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>
+              <span class="featured-product__benefit-icon">{{ block.settings.icon | default: '✓' }}</span>
+              <span>{{ block.settings.text }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <div class="featured-product__cta">
+          {%- if product -%}
+            <a href="{{ product.url }}" class="btn btn--large">Shop now — {{ product.price | money }}</a>
+          {%- else -%}
+            <a href="{{ section.settings.cta_link | default: '/collections/all' }}" class="btn btn--large">{{ section.settings.cta_label | default: 'Shop now' }}</a>
+          {%- endif -%}
+          <p class="featured-product__trust">🚚 Free shipping over $79 · 🔄 60-day returns · ⚡ Ships in 24h</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .featured-product-section { background: linear-gradient(180deg, #f0fdfa 0%, #fff 100%); }
+  .featured-product {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  @media (max-width: 900px) {
+    .featured-product { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .featured-product__media {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: 32px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ccfbf1, #5eead4);
+    box-shadow: 0 40px 80px -20px rgba(15, 118, 110, 0.35);
+  }
+  .featured-product__media img { width: 100%; height: 100%; object-fit: cover; }
+  .featured-product__badge {
+    position: absolute;
+    top: 20px; left: 20px;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(249, 115, 22, 0.4);
+    z-index: 2;
+  }
+
+  .featured-product__info h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    margin: 14px 0 12px;
+    color: var(--color-primary-dark);
+    letter-spacing: -0.02em;
+  }
+  .featured-product__rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 14px;
+  }
+  .featured-product__rating .stars { color: #f59e0b; letter-spacing: 1px; }
+
+  .featured-product__price {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+  .featured-product__price .price--current {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--color-primary-dark);
+    letter-spacing: -0.02em;
+  }
+  .featured-product__price .price--compare {
+    font-size: 22px;
+    color: #94a3b8;
+    text-decoration: line-through;
+  }
+  .featured-product__discount {
+    background: #fee2e2;
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  .featured-product__subtitle {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #475569;
+    margin-bottom: 24px;
+  }
+
+  .featured-product__benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+    display: grid;
+    gap: 10px;
+  }
+  .featured-product__benefits li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: #334155;
+    line-height: 1.5;
+  }
+  .featured-product__benefit-icon {
+    flex-shrink: 0;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .featured-product__cta .btn--large {
+    width: 100%;
+    min-height: 62px;
+    font-size: 16px;
+    box-shadow: 0 16px 32px -10px rgba(15, 118, 110, 0.4);
+  }
+  .featured-product__trust {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #64748b;
+    letter-spacing: 0.2px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Featured product",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Pick a product (or leave blank for default copy)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Hero product · Best seller" },
+    { "type": "text", "id": "heading", "label": "Heading override (uses product title if blank)", "default": "ZVB Women's Mesh Water Shoes" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Featherlight 5 oz mesh upper, anti-slip rubber sole, sock-fit comfort. The shoe that disappears on your feet — until you actually try to take it off." },
+    { "type": "image_picker", "id": "image_override", "label": "Image override (uses product image if blank)" },
+    { "type": "text", "id": "badge", "label": "Corner badge", "default": "Trending now" },
+    { "type": "text", "id": "review_count", "label": "Review count text", "default": "1,247" },
+    { "type": "text", "id": "price", "label": "Price (used only if no product picked)", "default": "$29.99" },
+    { "type": "text", "id": "compare_at_price", "label": "Compare-at price (used only if no product picked)", "default": "$49.99" },
+    { "type": "text", "id": "cta_label", "label": "CTA label (used only if no product picked)", "default": "Shop now" },
+    { "type": "url", "id": "cta_link", "label": "CTA link (used only if no product picked)" },
+    { "type": "color", "id": "bg_color", "label": "Background" }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji or check)", "default": "✓" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Quick-dry mesh — drains in seconds" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured product",
+      "blocks": [
+        { "type": "benefit", "settings": { "icon": "💧", "text": "Quick-dry mesh upper — water drains in seconds" } },
+        { "type": "benefit", "settings": { "icon": "🦶", "text": "Barefoot toe-shaped sole for natural grip" } },
+        { "type": "benefit", "settings": { "icon": "⚡", "text": "Featherlight 5 oz — packs flat for travel" } },
+        { "type": "benefit", "settings": { "icon": "🪨", "text": "Anti-slip rubber outsole grips wet rock & deck" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,7 +1,7 @@
 <header class="site-header" data-site-header>
   {%- comment -%} ──── Row 1 : Logo + utility icons ──── {%- endcomment -%}
   <div class="page-width header-top">
-    <a href="{{ routes.root_url }}" class="header-logo header-logo--script">
+    <a href="{{ routes.root_url }}" class="header-logo">
       {%- if section.settings.logo != blank -%}
         <img
           src="{{ section.settings.logo | image_url: width: section.settings.logo_width | times: 2 }}"
@@ -10,7 +10,13 @@
           style="max-width: {{ section.settings.logo_width }}px"
           loading="eager">
       {%- else -%}
-        <span class="header-logo__text">{{ shop.name | default: 'Tidefoot' }}</span>
+        {%- assign default_logo = section.settings.builtin_logo | default: 'firstt-logo.png' -%}
+        <img
+          src="{{ default_logo | asset_url }}"
+          alt="{{ shop.name | default: 'FirstT' }}"
+          width="{{ section.settings.logo_width }}"
+          style="max-width: {{ section.settings.logo_width }}px"
+          loading="eager">
       {%- endif -%}
     </a>
 
@@ -291,7 +297,17 @@
 {
   "name": "Header",
   "settings": [
-    { "type": "image_picker", "id": "logo", "label": "Logo image (overrides script text)" },
+    { "type": "image_picker", "id": "logo", "label": "Custom logo (overrides built-in)" },
+    {
+      "type": "select",
+      "id": "builtin_logo",
+      "label": "Built-in logo variant",
+      "options": [
+        { "value": "firstt-logo.png",          "label": "FirstT — text only" },
+        { "value": "firstt-logo-with-palm.png", "label": "FirstT — with palm + wave" }
+      ],
+      "default": "firstt-logo.png"
+    },
     { "type": "range", "id": "logo_width", "min": 80, "max": 320, "step": 10, "unit": "px", "label": "Logo width", "default": 220 },
     {
       "type": "checkbox",

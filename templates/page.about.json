@@ -16,7 +16,7 @@
       "blocks": {
         "b1": { "type": "eyebrow", "settings": { "text": "Why we exist" } },
         "b2": { "type": "heading", "settings": { "text": "Your feet shouldn't slow you down." } },
-        "b3": { "type": "paragraph", "settings": { "text": "Three friends, one bad pair of beach shoes, and hundreds of prototypes later — Tidefoot was born. Today, our shoes are tested by the people who use them most: surf instructors in Bali, paddleboard guides in Tahoe, and reef divers in the Florida Keys. Every detail is for a reason." } }
+        "b3": { "type": "paragraph", "settings": { "text": "Three friends, one bad pair of beach shoes, and hundreds of prototypes later — FirstT was born. Today, our shoes are tested by the people who use them most: surf instructors in Bali, paddleboard guides in Tahoe, and reef divers in the Florida Keys. Every detail is for a reason." } }
       },
       "block_order": ["b1", "b2", "b3"],
       "settings": { "alignment": "center" }

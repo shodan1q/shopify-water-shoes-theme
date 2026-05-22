@@ -12,11 +12,11 @@
     "body_font": "assistant_n4",
     "heading_font": "assistant_n7",
     "page_width": 1280,
-    "social_instagram_link": "https://instagram.com/tidefoot",
-    "social_facebook_link": "https://facebook.com/tidefoot",
-    "social_tiktok_link": "https://tiktok.com/@tidefoot",
-    "social_youtube_link": "https://youtube.com/@tidefoot",
-    "social_twitter_link": "https://x.com/tidefoot",
+    "social_instagram_link": "https://instagram.com/firstt",
+    "social_facebook_link": "https://facebook.com/firstt",
+    "social_tiktok_link": "https://tiktok.com/@firstt",
+    "social_youtube_link": "https://youtube.com/@firstt",
+    "social_twitter_link": "https://x.com/firstt",
     "cart_type": "drawer",
     "show_vendor": false,
     "show_free_shipping_bar": true,
@@ -28,7 +28,7 @@
     "newsletter_popup_delay": 5
   },
   "presets": {
-    "Tidefoot Default": {
+    "FirstT Default": {
       "color_primary": "#2DD4BF",
       "color_primary_dark": "#0F766E",
       "color_accent": "#F97316"

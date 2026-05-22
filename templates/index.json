@@ -3,14 +3,36 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "Summer 2025 · New colors live",
-        "heading": "Let the tide carry you.",
-        "subtitle": "Tidefoot water shoes are built with a quick-drying knit upper, multi-port drainage sole, and reef-grade rubber grip — engineered for the beach, the boat, and everything in between.",
-        "button_label": "Shop the collection",
-        "button_link": "/collections/all",
-        "button_label_2": "Our technology",
-        "button_link_2": "/pages/about",
-        "trust_text": "Rated 4.8/5 by 50,000+ adventurers worldwide"
+        "eyebrow": "Summer 2025 · The hero shoe is here",
+        "heading": "Meet the ZVB Water Shoe.",
+        "subtitle": "Featherlight 5 oz mesh, barefoot toe-shaped sole, anti-slip rubber grip. The shoe that disappears on your feet — until the moment you actually need it.",
+        "button_label": "Shop ZVB — $29.99",
+        "button_link": "/products/zvb-womens-lightweight-mesh-water-shoes",
+        "button_label_2": "See full collection",
+        "button_link_2": "/collections/all",
+        "trust_text": "Rated 4.9/5 by 1,247 ZVB owners"
+      }
+    },
+    "featured-product": {
+      "type": "featured-product",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "icon": "💧", "text": "Quick-dry mesh upper — water drains in seconds" } },
+        "b2": { "type": "benefit", "settings": { "icon": "🦶", "text": "Barefoot toe-shaped sole for natural grip" } },
+        "b3": { "type": "benefit", "settings": { "icon": "⚡", "text": "Featherlight 5 oz — packs flat for travel" } },
+        "b4": { "type": "benefit", "settings": { "icon": "🪨", "text": "Anti-slip rubber outsole grips wet rock & deck" } },
+        "b5": { "type": "benefit", "settings": { "icon": "🧦", "text": "Sock-fit cuff — wear with or without socks" } }
+      },
+      "block_order": ["b1","b2","b3","b4","b5"],
+      "settings": {
+        "eyebrow": "Hero product · #1 best seller",
+        "heading": "ZVB Women's Mesh Water Shoes",
+        "subtitle": "Engineered for beach, pool, paddleboard, and everywhere your feet hit the water. The pair our customers won't take off.",
+        "badge": "🔥 Trending",
+        "review_count": "1,247",
+        "price": "$29.99",
+        "compare_at_price": "$49.99",
+        "cta_label": "Shop ZVB now",
+        "cta_link": "/products/zvb-womens-lightweight-mesh-water-shoes"
       }
     },
     "collection-list": {
@@ -50,7 +72,7 @@
       "block_order": ["f1", "f2", "f3", "f4"],
       "settings": {
         "eyebrow": "Engineered for the elements",
-        "heading": "Why athletes choose Tidefoot",
+        "heading": "Why athletes choose FirstT",
         "subtitle": "Field-tested by paddleboarders in San Diego, surf instructors in Bali, and reef divers in the Florida Keys."
       }
     },
@@ -94,7 +116,7 @@
       "blocks": {
         "t1": { "type": "testimonial", "settings": { "text": "Best water shoes I've ever owned. They're light, they drain instantly, and the grip on wet rocks is unreal. I wear them paddleboarding every weekend.", "name": "Sarah Kalani", "role": "Paddleboarder, San Diego" } },
         "t2": { "type": "testimonial", "settings": { "text": "Bought four pairs for a family trip to Maui. Zero blisters, zero slipping — even on lava rock. My kids refuse to take them off.", "name": "Marcus Trent", "role": "Verified Buyer" } },
-        "t3": { "type": "testimonial", "settings": { "text": "I'm a yoga instructor on a sailboat. Tidefoots are the only shoe I trust on a wet deck. The teal pair gets compliments every single day.", "name": "Emma Rivera", "role": "Yoga Instructor, Miami" } }
+        "t3": { "type": "testimonial", "settings": { "text": "I'm a yoga instructor on a sailboat. FirstTs are the only shoe I trust on a wet deck. The teal pair gets compliments every single day.", "name": "Emma Rivera", "role": "Yoga Instructor, Miami" } }
       },
       "block_order": ["t1", "t2", "t3"],
       "settings": {
@@ -105,13 +127,13 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": { "type": "question", "settings": { "question": "What are water shoes used for?", "answer": "Water shoes protect your feet on wet, slippery, or sharp surfaces while letting water drain out quickly. They are ideal for paddleboarding, kayaking, beach walking, rocky rivers, snorkeling, and pool decks. Tidefoot shoes are also light enough to wear all day as casual footwear." } },
-        "q2": { "type": "question", "settings": { "question": "How should I size Tidefoot water shoes?", "answer": "Tidefoot shoes fit true to size for most adults. If you are between sizes, size down for a snugger sock-like fit (recommended for swimming) or size up for more toe room (recommended for hiking). A full US/EU/UK size chart is on every product page." } },
+        "q1": { "type": "question", "settings": { "question": "What are water shoes used for?", "answer": "Water shoes protect your feet on wet, slippery, or sharp surfaces while letting water drain out quickly. They are ideal for paddleboarding, kayaking, beach walking, rocky rivers, snorkeling, and pool decks. FirstT shoes are also light enough to wear all day as casual footwear." } },
+        "q2": { "type": "question", "settings": { "question": "How should I size FirstT water shoes?", "answer": "FirstT shoes fit true to size for most adults. If you are between sizes, size down for a snugger sock-like fit (recommended for swimming) or size up for more toe room (recommended for hiking). A full US/EU/UK size chart is on every product page." } },
         "q3": { "type": "question", "settings": { "question": "How quickly do they dry?", "answer": "The breathable knit upper and drainage ports in the sole let most of the water exit within seconds. Fully air-dry time is typically 30–60 minutes depending on humidity. They will not retain odor like neoprene booties." } },
         "q4": { "type": "question", "settings": { "question": "Are they good for rocky beaches and reefs?", "answer": "Yes. The outsole uses a reinforced rubber compound with multidirectional lugs that grip wet rocks, coral, and slippery boat decks. The upper is made from tightly-knit polyester that resists punctures from shells and small stones." } },
         "q5": { "type": "question", "settings": { "question": "Are they machine washable?", "answer": "Yes. Rinse off sand or salt first, then machine wash on a cold gentle cycle inside a mesh bag. Air dry only — never put them in the dryer or in direct sunlight for extended periods." } },
         "q6": { "type": "question", "settings": { "question": "What is your return policy?", "answer": "We offer a 60-day try-them-anywhere guarantee. If you are not happy for any reason, return them for a full refund or exchange — even if they have been worn outside. Free return labels on US orders." } },
-        "q7": { "type": "question", "settings": { "question": "Where does Tidefoot ship?", "answer": "Tidefoot ships worldwide. Free standard shipping is included on orders over $79 USD. Most orders to the US, Canada, UK, EU, and Australia arrive within 5–10 business days." } }
+        "q7": { "type": "question", "settings": { "question": "Where does FirstT ship?", "answer": "FirstT ships worldwide. Free standard shipping is included on orders over $79 USD. Most orders to the US, Canada, UK, EU, and Australia arrive within 5–10 business days." } }
       },
       "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7"],
       "settings": {
@@ -134,8 +156,9 @@
   },
   "order": [
     "hero",
-    "collection-list",
+    "featured-product",
     "stats",
+    "collection-list",
     "features",
     "featured-collection",
     "image-with-text",
