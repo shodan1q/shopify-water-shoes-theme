@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ---------- Menu ---------- */
 function initMenuToggle() {
   const toggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('.header-nav');
+  const nav = document.querySelector('.header-nav-wrap') || document.querySelector('.header-nav');
   if (!toggle || !nav) return;
   toggle.addEventListener('click', () => {
     const isOpen = nav.classList.toggle('open');

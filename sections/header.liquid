@@ -1,6 +1,7 @@
 <header class="site-header" data-site-header>
-  <div class="page-width header-inner">
-    <a href="{{ routes.root_url }}" class="header-logo">
+  {%- comment -%} ──── Row 1 : Logo + utility icons ──── {%- endcomment -%}
+  <div class="page-width header-top">
+    <a href="{{ routes.root_url }}" class="header-logo header-logo--script">
       {%- if section.settings.logo != blank -%}
         <img
           src="{{ section.settings.logo | image_url: width: section.settings.logo_width | times: 2 }}"
@@ -9,18 +10,57 @@
           style="max-width: {{ section.settings.logo_width }}px"
           loading="eager">
       {%- else -%}
-        <span style="display:inline-block;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#2DD4BF,#0F766E);"></span>
-        <span>{{ shop.name | default: 'Tidefoot' }}</span>
+        <span class="header-logo__text">{{ shop.name | default: 'Tidefoot' }}</span>
       {%- endif -%}
     </a>
 
-    <nav class="header-nav" aria-label="Main navigation">
+    <div class="header-actions">
+      <button type="button" class="header-icon" aria-label="Search" data-search-open>
+        {% render 'icon-search' %}
+      </button>
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="header-icon" aria-label="Account">
+          {% render 'icon-account' %}
+        </a>
+      {%- endif -%}
+      <a href="/pages/wishlist" class="header-icon header-icon--wishlist" aria-label="Wishlist" data-wishlist-link>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="cart-count-bubble" data-wishlist-count-bubble hidden>0</span>
+      </a>
+      {%- if settings.cart_type == 'drawer' -%}
+        <button type="button" class="header-icon header-icon--cart" aria-label="Cart" data-cart-open>
+          {% render 'icon-cart' %}
+          <span class="cart-count-bubble" data-cart-count-bubble {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+        </button>
+      {%- else -%}
+        <a href="{{ routes.cart_url }}" class="header-icon header-icon--cart" aria-label="Cart">
+          {% render 'icon-cart' %}
+          {%- if cart.item_count > 0 -%}
+            <span class="cart-count-bubble">{{ cart.item_count }}</span>
+          {%- endif -%}
+        </a>
+      {%- endif -%}
+      <button type="button" class="header-icon menu-toggle" aria-expanded="false" aria-label="Menu">
+        {% render 'icon-menu' %}
+      </button>
+    </div>
+  </div>
+
+  {%- comment -%} ──── Row 2 : Navigation strip ──── {%- endcomment -%}
+  <div class="header-nav-wrap">
+    <nav class="page-width header-nav" aria-label="Main navigation">
+      {%- assign current_url = request.path -%}
       {%- for link in section.settings.menu.links -%}
+        {%- assign is_promo = false -%}
+        {%- if link.title contains '🚀' or link.title contains '✨' or link.title contains '🔥' or link.title contains '⚡' -%}
+          {%- assign is_promo = true -%}
+        {%- endif -%}
+
         {%- if link.links.size > 0 -%}
           <div class="header-nav__item has-submenu" data-mega-trigger>
-            <a href="{{ link.url }}" class="header-nav__link">
+            <a href="{{ link.url }}" class="header-nav__link{% if link.active %} is-active{% endif %}{% if is_promo %} is-promo{% endif %}">
               {{ link.title }}
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              <svg class="header-nav__chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
             </a>
             <div class="mega-menu" data-mega-menu>
               <div class="page-width">
@@ -52,41 +92,12 @@
             </div>
           </div>
         {%- else -%}
-          <a href="{{ link.url }}" class="header-nav__link">{{ link.title }}</a>
+          <a href="{{ link.url }}" class="header-nav__link{% if link.active %} is-active{% endif %}{% if is_promo %} is-promo{% endif %}">
+            {{ link.title }}
+          </a>
         {%- endif -%}
       {%- endfor -%}
     </nav>
-
-    <div class="header-actions">
-      <button type="button" class="header-icon" aria-label="Search" data-search-open>
-        {% render 'icon-search' %}
-      </button>
-      {%- if shop.customer_accounts_enabled -%}
-        <a href="{{ routes.account_url }}" class="header-icon" aria-label="Account">
-          {% render 'icon-account' %}
-        </a>
-      {%- endif -%}
-      <a href="/pages/wishlist" class="header-icon header-icon--wishlist" aria-label="Wishlist" data-wishlist-link>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        <span class="cart-count-bubble" data-wishlist-count-bubble hidden>0</span>
-      </a>
-      {%- if settings.cart_type == 'drawer' -%}
-        <button type="button" class="header-icon" aria-label="Cart" data-cart-open>
-          {% render 'icon-cart' %}
-          <span class="cart-count-bubble" data-cart-count-bubble {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
-        </button>
-      {%- else -%}
-        <a href="{{ routes.cart_url }}" class="header-icon" aria-label="Cart">
-          {% render 'icon-cart' %}
-          {%- if cart.item_count > 0 -%}
-            <span class="cart-count-bubble">{{ cart.item_count }}</span>
-          {%- endif -%}
-        </a>
-      {%- endif -%}
-      <button type="button" class="header-icon menu-toggle" aria-expanded="false" aria-label="Menu">
-        {% render 'icon-menu' %}
-      </button>
-    </div>
   </div>
 </header>
 
@@ -94,8 +105,8 @@
 {
   "name": "Header",
   "settings": [
-    { "type": "image_picker", "id": "logo", "label": "Logo image (overrides global)" },
-    { "type": "range", "id": "logo_width", "min": 50, "max": 250, "step": 10, "unit": "px", "label": "Logo width", "default": 140 },
+    { "type": "image_picker", "id": "logo", "label": "Logo image (overrides script text)" },
+    { "type": "range", "id": "logo_width", "min": 80, "max": 320, "step": 10, "unit": "px", "label": "Logo width", "default": 220 },
     { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
     { "type": "header", "content": "Mega menu promo card" },
     { "type": "image_picker", "id": "mega_promo_image", "label": "Promo image" },
