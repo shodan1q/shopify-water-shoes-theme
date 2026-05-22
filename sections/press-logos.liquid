@@ -103,9 +103,23 @@
 {
   "name": "Press logos",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "As featured in" },
-    { "type": "checkbox", "id": "scroll", "label": "Auto-scroll (marquee)", "default": false },
-    { "type": "color", "id": "bg_color", "label": "Background" }
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "As featured in"
+    },
+    {
+      "type": "checkbox",
+      "id": "scroll",
+      "label": "Auto-scroll (marquee)",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background"
+    }
   ],
   "max_blocks": 12,
   "blocks": [
@@ -113,21 +127,61 @@
       "type": "logo",
       "name": "Logo",
       "settings": [
-        { "type": "text", "id": "name", "label": "Name", "default": "Outside" },
-        { "type": "image_picker", "id": "image", "label": "Logo image (recommended)" },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Outside"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo image (recommended)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
       ]
     }
   ],
-  "default": {
-    "blocks": [
-      { "type": "logo", "settings": { "name": "Outside" } },
-      { "type": "logo", "settings": { "name": "Surfer" } },
-      { "type": "logo", "settings": { "name": "GearJunkie" } },
-      { "type": "logo", "settings": { "name": "Travel + Leisure" } },
-      { "type": "logo", "settings": { "name": "Runner's World" } }
-    ]
-  },
-  "presets": [ { "name": "Press logos" } ]
+  "presets": [
+    {
+      "name": "Press logos",
+      "blocks": [
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Outside"
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Surfer"
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "GearJunkie"
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Travel + Leisure"
+          }
+        },
+        {
+          "type": "logo",
+          "settings": {
+            "name": "Runner's World"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

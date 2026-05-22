@@ -74,39 +74,104 @@
 {
   "name": "Multicolumn",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Why Tidefoot" },
-    { "type": "textarea", "id": "subtitle", "label": "Subtitle" },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why Tidefoot"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
     {
       "type": "range",
       "id": "columns",
       "label": "Columns",
-      "min": 2, "max": 5, "step": 1,
+      "min": 2,
+      "max": 5,
+      "step": 1,
       "default": 3
     },
-    { "type": "color", "id": "bg_color", "label": "Background" }
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background"
+    }
   ],
   "blocks": [
     {
       "type": "column",
       "name": "Column",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "icon", "label": "Or icon (emoji)" },
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Quick-dry" },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "Drains and dries in minutes." },
-        { "type": "text", "id": "link_label", "label": "Link label" },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Or icon (emoji)"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Quick-dry"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Drains and dries in minutes."
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
       ]
     }
   ],
-  "default": {
-    "blocks": [
-      { "type": "column", "settings": { "icon": "💧", "heading": "Quick-dry knit" } },
-      { "type": "column", "settings": { "icon": "🦶", "heading": "Barefoot feel" } },
-      { "type": "column", "settings": { "icon": "⚡", "heading": "Anti-slip sole" } }
-    ]
-  },
-  "presets": [ { "name": "Multicolumn" } ]
+  "presets": [
+    {
+      "name": "Multicolumn",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "icon": "💧",
+            "heading": "Quick-dry knit"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "icon": "🦶",
+            "heading": "Barefoot feel"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "icon": "⚡",
+            "heading": "Anti-slip sole"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

@@ -72,9 +72,21 @@
 {
   "name": "Collage",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-    { "type": "text", "id": "heading", "label": "Heading" },
-    { "type": "color", "id": "bg_color", "label": "Background" }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background"
+    }
   ],
   "max_blocks": 5,
   "blocks": [
@@ -82,22 +94,70 @@
       "type": "tile",
       "name": "Tile",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "heading", "label": "Heading" },
-        { "type": "text", "id": "subheading", "label": "Subheading" },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
       ]
     }
   ],
-  "default": {
-    "blocks": [
-      { "type": "tile", "settings": { "heading": "Best sellers", "subheading": "Shop now" } },
-      { "type": "tile", "settings": { "heading": "Kids", "subheading": "Family kit" } },
-      { "type": "tile", "settings": { "heading": "Sale", "subheading": "Up to 30% off" } },
-      { "type": "tile", "settings": { "heading": "New arrivals", "subheading": "2025 collection" } },
-      { "type": "tile", "settings": { "heading": "Gift cards", "subheading": "From $25" } }
-    ]
-  },
-  "presets": [ { "name": "Collage" } ]
+  "presets": [
+    {
+      "name": "Collage",
+      "blocks": [
+        {
+          "type": "tile",
+          "settings": {
+            "heading": "Best sellers",
+            "subheading": "Shop now"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "heading": "Kids",
+            "subheading": "Family kit"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "heading": "Sale",
+            "subheading": "Up to 30% off"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "heading": "New arrivals",
+            "subheading": "2025 collection"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "heading": "Gift cards",
+            "subheading": "From $25"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

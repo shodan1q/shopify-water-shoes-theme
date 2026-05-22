@@ -21,21 +21,55 @@
       "type": "stat",
       "name": "Stat",
       "settings": [
-        { "type": "text", "id": "value", "label": "Value", "default": "50K+" },
-        { "type": "text", "id": "label", "label": "Label", "default": "Happy customers" }
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "50K+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Happy customers"
+        }
       ]
     }
   ],
-  "default": {
-    "blocks": [
-      { "type": "stat", "settings": { "value": "50K+", "label": "Pairs sold worldwide" } },
-      { "type": "stat", "settings": { "value": "4.8/5", "label": "Average rating" } },
-      { "type": "stat", "settings": { "value": "60-day", "label": "Try-anywhere guarantee" } },
-      { "type": "stat", "settings": { "value": "FREE", "label": "Shipping over $79" } }
-    ]
-  },
   "presets": [
-    { "name": "Stats bar" }
+    {
+      "name": "Stats bar",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "value": "50K+",
+            "label": "Pairs sold worldwide"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "4.8/5",
+            "label": "Average rating"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "60-day",
+            "label": "Try-anywhere guarantee"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "FREE",
+            "label": "Shipping over $79"
+          }
+        }
+      ]
+    }
   ]
 }
 {% endschema %}
